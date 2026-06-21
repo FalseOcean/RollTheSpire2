@@ -4,7 +4,7 @@
 
 它不需要启动游戏即可离线模拟和筛选开局结果，重点支持 Neow 开局、Neow's Bones / 骨骰路线、Neow 遗物效果、Boss、Ancient、事件 effective queue、收藏库和粗筛候选池。项目当前提供 WPF 图形界面，适合单种分析、批量 Roll 种、保存爽种、候选池精筛和 `progress.save` 解锁档案导入。
 
-当前稳定版：`v2.1.0`。本版本基于已经实测正确的 `v2.1.0-preview2e` 预测基线整理而来；公开发布整理只更新项目名称、启动脚本、发布脚本和文档，**没有修改 RollCore 预测算法、WPF 功能逻辑、`config.json` 或主运行数据路径**。
+当前稳定版：`v2.1.0`。本版本基于已经实测正确的 `v2.1.0-preview2e` 预测基线整理而来；公开发布整理只更新项目名称、启动脚本、发布脚本和文档。
 
 
 ## 内容列表
@@ -34,7 +34,6 @@
 - 可以把命中的 seed 保存到收藏库，后续按标签、备注、角色、命中解释重新检索。
 - 可以把宽松条件筛到的结果保存成粗筛候选池，再逐步追加条件做精筛。
 
-本项目是外部 Companion Tool，不是游戏内 Workshop Mod。它不会注入游戏进程，也不会修改游戏存档。
 
 ## 安装
 
@@ -51,16 +50,6 @@ RollTheSpire2_v2.1.0_win-x64.zip
 ```text
 RollTheSpire2.exe
 ```
-
-发布版推荐使用 self-contained portable zip，通常会比较大，因为其中包含 .NET 运行时。这样普通用户不需要额外安装 .NET SDK 或 Runtime。
-
-如果双击 exe 后窗口没有出现，可以尝试双击备用启动器：
-
-```text
-run_rollthespire2.bat
-```
-
-它可以保留控制台窗口，便于查看启动错误。
 
 ### 从源码运行 / 构建
 
@@ -294,26 +283,6 @@ publish/RollTheSpire2_v2.1.0_win-x64/
 
 这个目录应压缩后上传到 GitHub Releases，不应直接提交进仓库。
 
-## GitHub 发布建议
-
-建议把仓库和 Release 分开管理：
-
-- GitHub 仓库：提交源码、数据、文档和构建脚本。
-- GitHub Releases：上传 `publish/` 目录压缩出来的普通用户发布包。
-
-不要提交：
-
-```text
-publish/
-bin/
-obj/
-profiles/unlock_profile.json
-profiles/database/*.json
-profiles/database/*.tsv
-```
-
-这些内容已经在 `.gitignore` 中忽略。
-
 ## 维护者
 
 - Ocean False / @falseocean8
@@ -334,7 +303,7 @@ profiles/database/*.tsv
 - 预期结果与实际游戏结果。
 - 如果涉及事件队列、Boss、Ancient 或 Neow 路线，请尽量提供最小复现步骤。
 
-如果改动了预测逻辑、数据文件或 `config.json:data_file`，必须附带回归测试说明。尤其不要把主运行数据从 `data/legacy/sts2_runtime_legacy_v2.json` 改到 `data/sts2_data.json`，除非正在做专门的数据格式迁移并完成实测回归。
+如果改动了预测逻辑、数据文件或 `config.json:data_file`，需要附带说明。
 
 ## 使用许可
 
