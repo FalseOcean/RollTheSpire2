@@ -1,0 +1,1295 @@
+{
+  "schema": 1,
+  "id_convention": "canonical_id uses CamelCase runtime ID",
+  "default_language": "zhs",
+  "source": {
+    "primary": "sts2",
+    "neow_source_file": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs",
+    "display_name_source": "fixed Neow relic audit name table; source effects from sts2",
+    "generated_at": "2026-06-17T00:16:58",
+    "notes": "Effect audit synchronized for WPF preview10d: project Chinese names fixed; Kaleidoscope is exposed as aggregated card results; fixed effects remain side effects, not prediction/filter targets."
+  },
+  "relic_count": 28,
+  "summary": {
+    "plain_relic_count": 4,
+    "with_process_templates_count": 24,
+    "manual_review_count": 2,
+    "new_leaf_leafy_poultice_confusion_found": false,
+    "source_id_canonical_id_mismatches": [],
+    "preview10b_audit_synced": true,
+    "wpf_preview10_source_trace_split_preserved": true,
+    "project_source_key_corrections": [
+      "SmallCapsule generated_relics -> source_relics.SmallCapsule",
+      "LargeCapsule generated_relics -> source_relics.LargeCapsule",
+      "LargeCapsule fixed basic cards kept as side_effect.LargeCapsule (not a selectable random card result)",
+      "LavaRock Act1 boss relic reward kept as side_effect.LavaRockAct1Boss to avoid mixing with opening generated_relics"
+    ]
+  },
+  "relics": {
+    "ArcaneScroll": {
+      "canonical_id": "ArcaneScroll",
+      "source_id": "ARCANE_SCROLL",
+      "display_name": {
+        "zhs": "奥术卷轴",
+        "eng": "Arcane Scroll"
+      },
+      "aliases": [
+        "ARCANE_SCROLL",
+        "ArcaneScroll"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "card_reward",
+      "process_templates": [
+        {
+          "template_id": "arcane_scroll_rare_card",
+          "label": {
+            "zhs": "奥术卷轴：稀有卡牌结果",
+            "eng": "Arcane Scroll rare card result"
+          },
+          "output_type": "card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.ArcaneScroll",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/ArcaneScroll.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:68",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/ArcaneScroll.cs:19"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "BoomingConch": {
+      "canonical_id": "BoomingConch",
+      "source_id": "BOOMING_CONCH",
+      "display_name": {
+        "zhs": "轰鸣海螺",
+        "eng": "Booming Conch"
+      },
+      "aliases": [
+        "BOOMING_CONCH",
+        "BoomingConch"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "plain_relic",
+      "process_templates": [],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/BoomingConch.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:69",
+        "source_lines": [],
+        "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic."
+      },
+      "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic.",
+      "warnings": []
+    },
+    "FishingRod": {
+      "canonical_id": "FishingRod",
+      "source_id": "FISHING_ROD",
+      "display_name": {
+        "zhs": "钓鱼竿",
+        "eng": "Fishing Rod"
+      },
+      "aliases": [
+        "FISHING_ROD",
+        "FishingRod"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "plain_relic",
+      "process_templates": [],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/FishingRod.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:70",
+        "source_lines": [],
+        "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic."
+      },
+      "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic.",
+      "warnings": []
+    },
+    "GoldenPearl": {
+      "canonical_id": "GoldenPearl",
+      "source_id": "GOLDEN_PEARL",
+      "display_name": {
+        "zhs": "金珍珠",
+        "eng": "Golden Pearl"
+      },
+      "aliases": [
+        "GOLDEN_PEARL",
+        "GoldenPearl"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "golden_pearl_gold",
+          "label": {
+            "zhs": "金珍珠：金币",
+            "eng": "Golden Pearl gold"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.GoldenPearl",
+          "notes": ""
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/GoldenPearl.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:71",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/GoldenPearl.cs:17"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "Kaleidoscope": {
+      "canonical_id": "Kaleidoscope",
+      "source_id": "KALEIDOSCOPE",
+      "display_name": {
+        "zhs": "万花筒",
+        "eng": "Kaleidoscope"
+      },
+      "aliases": [
+        "KALEIDOSCOPE",
+        "Kaleidoscope"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "card_reward_multi_group",
+      "process_templates": [
+        {
+          "template_id": "kaleidoscope_cards",
+          "label": {
+            "zhs": "万花筒：给牌结果",
+            "eng": "Kaleidoscope card results"
+          },
+          "output_type": "card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.Kaleidoscope",
+          "notes": "RollCore records Kaleidoscope card opportunities by source. WPF exposes one aggregated result for now. Exact option-group semantics (two groups, pick one card from each group) is documented as a later matching-layer task."
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/Kaleidoscope.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:72",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/Kaleidoscope.cs:24",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/Kaleidoscope.cs:33",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/Kaleidoscope.cs:40",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/Kaleidoscope.cs:47"
+        ],
+        "notes": "Kaleidoscope generates two card reward groups from non-current character card pools."
+      },
+      "notes": "Kaleidoscope generates two card reward groups from non-current character card pools.",
+      "warnings": []
+    },
+    "LeadPaperweight": {
+      "canonical_id": "LeadPaperweight",
+      "source_id": "LEAD_PAPERWEIGHT",
+      "display_name": {
+        "zhs": "铅制镇纸",
+        "eng": "Lead Paperweight"
+      },
+      "aliases": [
+        "LEAD_PAPERWEIGHT",
+        "LeadPaperweight"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "card_reward",
+      "process_templates": [
+        {
+          "template_id": "lead_paperweight_colorless_card",
+          "label": {
+            "zhs": "铅制镇纸：无色罕见卡牌结果",
+            "eng": "Lead Paperweight colorless card result"
+          },
+          "output_type": "card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.LeadPaperweight",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/LeadPaperweight.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:73",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LeadPaperweight.cs:19",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LeadPaperweight.cs:21"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "LostCoffer": {
+      "canonical_id": "LostCoffer",
+      "source_id": "LOST_COFFER",
+      "display_name": {
+        "zhs": "失物盒",
+        "eng": "Lost Coffer"
+      },
+      "aliases": [
+        "LOST_COFFER",
+        "LostCoffer"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "composite",
+      "process_templates": [
+        {
+          "template_id": "lost_coffer_card_reward",
+          "label": {
+            "zhs": "失物盒：卡牌奖励",
+            "eng": "Lost Coffer card reward"
+          },
+          "output_type": "card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.LostCoffer",
+          "notes": ""
+        },
+        {
+          "template_id": "lost_coffer_potion_reward",
+          "label": {
+            "zhs": "失物盒：药水奖励",
+            "eng": "Lost Coffer potion reward"
+          },
+          "output_type": "potion",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_potions.LostCoffer",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/LostCoffer.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:74",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LostCoffer.cs:16",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LostCoffer.cs:20",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LostCoffer.cs:21"
+        ],
+        "notes": "LostCoffer generates one card reward and one potion reward."
+      },
+      "notes": "LostCoffer generates one card reward and one potion reward.",
+      "warnings": []
+    },
+    "MassiveScroll": {
+      "canonical_id": "MassiveScroll",
+      "source_id": "MASSIVE_SCROLL",
+      "display_name": {
+        "zhs": "巨大卷轴",
+        "eng": "Massive Scroll"
+      },
+      "aliases": [
+        "MASSIVE_SCROLL",
+        "MassiveScroll"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "card_reward",
+      "process_templates": [
+        {
+          "template_id": "massive_scroll_multiplayer_card",
+          "label": {
+            "zhs": "巨大卷轴：多人给牌",
+            "eng": "Massive Scroll multiplayer card reward"
+          },
+          "output_type": "card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.MassiveScroll",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/MassiveScroll.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:75",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/MassiveScroll.cs:24"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "NeowsTorment": {
+      "canonical_id": "NeowsTorment",
+      "source_id": "NEOWS_TORMENT",
+      "display_name": {
+        "zhs": "涅奥的苦痛",
+        "eng": "Neow's Torment"
+      },
+      "aliases": [
+        "NEOWS_TORMENT",
+        "NeowsTorment"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "card_reward",
+      "process_templates": [
+        {
+          "template_id": "neows_torment_fury",
+          "label": {
+            "zhs": "涅奥的苦痛：固定卡牌",
+            "eng": "Neow's Torment fixed card"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.NeowsTormentFury",
+          "notes": "Fixed NeowsFury card; treated as a fixed side effect of obtaining NeowsTorment, not a prediction/filter target."
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsTorment.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:76",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsTorment.cs:19"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "NewLeaf": {
+      "canonical_id": "NewLeaf",
+      "source_id": "NEW_LEAF",
+      "display_name": {
+        "zhs": "新叶",
+        "eng": "New Leaf"
+      },
+      "aliases": [
+        "NEW_LEAF",
+        "NewLeaf"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "transform_card",
+      "process_templates": [
+        {
+          "template_id": "new_leaf_transform",
+          "label": {
+            "zhs": "新叶：一次变化结果",
+            "eng": "New Leaf single transform result"
+          },
+          "output_type": "transform_card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.NewLeaf",
+          "notes": "Default process filtering uses current-character transform results. Advanced route-aware filtering for colorless/other-character/curse inputs is deferred."
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/NewLeaf.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:77",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NewLeaf.cs:22",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NewLeaf.cs:27"
+        ],
+        "notes": "NewLeaf performs one selected-card transform. It is distinct from LeafyPoultice."
+      },
+      "notes": "NewLeaf performs one selected-card transform. Default WPF process filtering uses the current character card pool. Advanced route-aware NewLeaf filtering (transforming cards gained earlier from LeadPaperweight/Kaleidoscope/HeftyTablet etc.) is a future Core/matching-layer plan.",
+      "warnings": [
+        "distinct from LeafyPoultice; do not alias"
+      ]
+    },
+    "PhialHolster": {
+      "canonical_id": "PhialHolster",
+      "source_id": "PHIAL_HOLSTER",
+      "display_name": {
+        "zhs": "药瓶皮套",
+        "eng": "Phial Holster"
+      },
+      "aliases": [
+        "PHIAL_HOLSTER",
+        "PhialHolster"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "potion_reward",
+      "process_templates": [
+        {
+          "template_id": "phial_holster_potions",
+          "label": {
+            "zhs": "药瓶皮套：药水奖励",
+            "eng": "Phial Holster potion reward"
+          },
+          "output_type": "potion",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_potions.PhialHolster",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/PhialHolster.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:78",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/PhialHolster.cs:26"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "PreciseScissors": {
+      "canonical_id": "PreciseScissors",
+      "source_id": "PRECISE_SCISSORS",
+      "display_name": {
+        "zhs": "精准剪刀",
+        "eng": "Precise Scissors"
+      },
+      "aliases": [
+        "PRECISE_SCISSORS",
+        "PreciseScissors"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "precise_scissors_remove_card",
+          "label": {
+            "zhs": "精准剪刀：删牌",
+            "eng": "Precise Scissors remove card"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.PreciseScissors",
+          "notes": ""
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/PreciseScissors.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:79",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/PreciseScissors.cs:18"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "ScrollBoxes": {
+      "canonical_id": "ScrollBoxes",
+      "source_id": "SCROLL_BOXES",
+      "display_name": {
+        "zhs": "卷轴箱",
+        "eng": "Scroll Boxes"
+      },
+      "aliases": [
+        "SCROLL_BOXES",
+        "ScrollBoxes"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "card_reward_multi_group",
+      "process_templates": [
+        {
+          "template_id": "scroll_boxes_bundle_choice",
+          "label": {
+            "zhs": "卷轴箱：卡牌包结果",
+            "eng": "Scroll Boxes card bundle choice"
+          },
+          "output_type": "card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.ScrollBoxes",
+          "notes": "WPF exposes ScrollBoxes as one aggregated card-bundle result for now. Exact option-group semantics (two bundles, pick one bundle) is documented as a later matching-layer task."
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/ScrollBoxes.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:80",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/ScrollBoxes.cs:32",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/ScrollBoxes.cs:60",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/ScrollBoxes.cs:64"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "WingedBoots": {
+      "canonical_id": "WingedBoots",
+      "source_id": "WINGED_BOOTS",
+      "display_name": {
+        "zhs": "带翼靴",
+        "eng": "Winged Boots"
+      },
+      "aliases": [
+        "WINGED_BOOTS",
+        "WingedBoots"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "plain_relic",
+      "process_templates": [],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/WingedBoots.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:81",
+        "source_lines": [],
+        "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic."
+      },
+      "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic.",
+      "warnings": []
+    },
+    "LavaRock": {
+      "canonical_id": "LavaRock",
+      "source_id": "LAVA_ROCK",
+      "display_name": {
+        "zhs": "熔岩石",
+        "eng": "Lava Rock"
+      },
+      "aliases": [
+        "LAVA_ROCK",
+        "LavaRock"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "relic_reward",
+      "process_templates": [
+        {
+          "template_id": "lava_rock_act1_boss_relics",
+          "label": {
+            "zhs": "熔岩石：Act1 Boss 遗物奖励",
+            "eng": "Lava Rock Act 1 boss relic reward"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.LavaRockAct1Boss",
+          "notes": "Future Act1 Boss reward modifier; do not mix with opening generated_relics or Small/LargeCapsule source_relics."
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/LavaRock.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:84",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LavaRock.cs:38",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LavaRock.cs:59"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "NeowsTalisman": {
+      "canonical_id": "NeowsTalisman",
+      "source_id": "NEOWS_TALISMAN",
+      "display_name": {
+        "zhs": "涅奥护符",
+        "eng": "Neow's Talisman"
+      },
+      "aliases": [
+        "NEOWS_TALISMAN",
+        "NeowsTalisman"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "neows_talisman_upgrade_basic",
+          "label": {
+            "zhs": "涅奥护符：升级基础牌",
+            "eng": "Neow's Talisman upgrade basic cards"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.NeowsTalisman",
+          "notes": ""
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsTalisman.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:86",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsTalisman.cs:16"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "NutritiousOyster": {
+      "canonical_id": "NutritiousOyster",
+      "source_id": "NUTRITIOUS_OYSTER",
+      "display_name": {
+        "zhs": "营养牡蛎",
+        "eng": "Nutritious Oyster"
+      },
+      "aliases": [
+        "NUTRITIOUS_OYSTER",
+        "NutritiousOyster"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "nutritious_oyster_max_hp",
+          "label": {
+            "zhs": "营养牡蛎：最大生命",
+            "eng": "Nutritious Oyster max HP"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.NutritiousOyster",
+          "notes": ""
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/NutritiousOyster.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:88",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NutritiousOyster.cs:17"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "Pomander": {
+      "canonical_id": "Pomander",
+      "source_id": "POMANDER",
+      "display_name": {
+        "zhs": "香丸",
+        "eng": "Pomander"
+      },
+      "aliases": [
+        "POMANDER",
+        "Pomander"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "pomander_upgrade_card",
+          "label": {
+            "zhs": "香丸：升级牌",
+            "eng": "Pomander upgrade card"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.Pomander",
+          "notes": ""
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/Pomander.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:90",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/Pomander.cs:17"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "SmallCapsule": {
+      "canonical_id": "SmallCapsule",
+      "source_id": "SMALL_CAPSULE",
+      "display_name": {
+        "zhs": "小型扭蛋",
+        "eng": "Small Capsule"
+      },
+      "aliases": [
+        "SMALL_CAPSULE",
+        "SmallCapsule"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "relic_reward",
+      "process_templates": [
+        {
+          "template_id": "small_capsule_random_relic",
+          "label": {
+            "zhs": "小型扭蛋：随机遗物",
+            "eng": "Small Capsule random relic"
+          },
+          "output_type": "relic",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_relics.SmallCapsule",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/SmallCapsule.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:92",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/SmallCapsule.cs:13",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/SmallCapsule.cs:17"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "StoneHumidifier": {
+      "canonical_id": "StoneHumidifier",
+      "source_id": "STONE_HUMIDIFIER",
+      "display_name": {
+        "zhs": "石制加湿器",
+        "eng": "Stone Humidifier"
+      },
+      "aliases": [
+        "STONE_HUMIDIFIER",
+        "StoneHumidifier"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "plain_relic",
+      "process_templates": [],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/StoneHumidifier.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:94",
+        "source_lines": [],
+        "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic."
+      },
+      "notes": "No Neow pickup generated card/relic/potion/curse/transform result was found; treated as a plain Neow relic.",
+      "warnings": []
+    },
+    "CursedPearl": {
+      "canonical_id": "CursedPearl",
+      "source_id": "CURSED_PEARL",
+      "display_name": {
+        "zhs": "诅咒珍珠",
+        "eng": "Cursed Pearl"
+      },
+      "aliases": [
+        "CURSED_PEARL",
+        "CursedPearl"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "composite",
+      "process_templates": [
+        {
+          "template_id": "cursed_pearl_greed",
+          "label": {
+            "zhs": "诅咒珍珠：贪婪诅咒",
+            "eng": "Cursed Pearl Greed curse"
+          },
+          "output_type": "curse",
+          "match_modes": [],
+          "source_key": "side_effect.CursedPearlGreed",
+          "notes": "Fixed Greed curse; treated as a fixed side effect of obtaining CursedPearl, not a prediction/filter target."
+        },
+        {
+          "template_id": "cursed_pearl_gold",
+          "label": {
+            "zhs": "诅咒珍珠：金币",
+            "eng": "Cursed Pearl gold"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.CursedPearl",
+          "notes": ""
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/CursedPearl.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:98",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/CursedPearl.cs:19",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/CursedPearl.cs:15"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "HeftyTablet": {
+      "canonical_id": "HeftyTablet",
+      "source_id": "HEFTY_TABLET",
+      "display_name": {
+        "zhs": "沉重石板",
+        "eng": "Hefty Tablet"
+      },
+      "aliases": [
+        "HEFTY_TABLET",
+        "HeftyTablet"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "composite",
+      "process_templates": [
+        {
+          "template_id": "hefty_tablet_rare_card",
+          "label": {
+            "zhs": "沉重石板：稀有卡牌结果",
+            "eng": "Hefty Tablet rare card result"
+          },
+          "output_type": "card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.HeftyTablet",
+          "notes": ""
+        },
+        {
+          "template_id": "hefty_tablet_injury",
+          "label": {
+            "zhs": "沉重石板：伤痛诅咒",
+            "eng": "Hefty Tablet Injury curse"
+          },
+          "output_type": "curse",
+          "match_modes": [],
+          "source_key": "side_effect.HeftyTabletInjury",
+          "notes": "Fixed Injury curse; treated as a fixed side effect of obtaining HeftyTablet, not a prediction/filter target."
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/HeftyTablet.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:99",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/HeftyTablet.cs:27",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/HeftyTablet.cs:25"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "LargeCapsule": {
+      "canonical_id": "LargeCapsule",
+      "source_id": "LARGE_CAPSULE",
+      "display_name": {
+        "zhs": "巨大扭蛋",
+        "eng": "Large Capsule"
+      },
+      "aliases": [
+        "LARGE_CAPSULE",
+        "LargeCapsule"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "composite",
+      "process_templates": [
+        {
+          "template_id": "large_capsule_random_relics",
+          "label": {
+            "zhs": "巨大扭蛋：随机遗物",
+            "eng": "Large Capsule random relics"
+          },
+          "output_type": "relic",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_relics.LargeCapsule",
+          "notes": ""
+        },
+        {
+          "template_id": "large_capsule_basic_cards",
+          "label": {
+            "zhs": "巨大扭蛋：固定基础牌",
+            "eng": "Large Capsule basic cards"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.LargeCapsule",
+          "notes": "Fixed basic Strike/Defend side effect; current RollCore keeps these in deck state for later transforms, not as a selectable random card opportunity."
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/LargeCapsule.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:100",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LargeCapsule.cs:23"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "LeafyPoultice": {
+      "canonical_id": "LeafyPoultice",
+      "source_id": "LEAFY_POULTICE",
+      "display_name": {
+        "zhs": "树叶药膏",
+        "eng": "Leafy Poultice"
+      },
+      "aliases": [
+        "LEAFY_POULTICE",
+        "LeafyPoultice"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "transform_card",
+      "process_templates": [
+        {
+          "template_id": "leafy_poultice_transforms",
+          "label": {
+            "zhs": "树叶药膏：变化结果",
+            "eng": "Leafy Poultice transform results"
+          },
+          "output_type": "transform_card",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "source_cards.LeafyPoultice",
+          "notes": "LeafyPoultice performs two transforms on this character's basic Strike and basic Defend if present. WPF exposes them as one aggregated transform result; multiple tags mean the two transform outputs should contain those cards, without forcing Strike/Defend slot order. Unlike NewLeaf advanced routes, LeafyPoultice does not transform colorless or other-character cards."
+        },
+        {
+          "template_id": "leafy_poultice_max_hp_loss",
+          "label": {
+            "zhs": "树叶药膏：最大生命损失",
+            "eng": "Leafy Poultice max HP loss"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.LeafyPoultice",
+          "notes": "Fixed side effect; displayed as explanation only."
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/LeafyPoultice.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:101",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LeafyPoultice.cs:21",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LeafyPoultice.cs:23",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/LeafyPoultice.cs:36"
+        ],
+        "notes": "LeafyPoultice loses max HP, then transforms the first basic Strike and the first basic Defend if present. It is distinct from NewLeaf."
+      },
+      "notes": "LeafyPoultice loses max HP, then transforms this character's basic Strike and basic Defend if present. In the WPF Tag Builder it is exposed as one aggregated transform-result template, but its candidate pool should stay within the current character card pool.",
+      "warnings": [
+        "distinct from NewLeaf; do not alias"
+      ]
+    },
+    "NeowsBones": {
+      "canonical_id": "NeowsBones",
+      "source_id": "NEOWS_BONES",
+      "display_name": {
+        "zhs": "涅奥骨骰",
+        "eng": "Neow's Bones"
+      },
+      "aliases": [
+        "NEOWS_BONES",
+        "NeowsBones"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "composite",
+      "process_templates": [
+        {
+          "template_id": "neows_bones_relic_1",
+          "label": {
+            "zhs": "涅奥骨骰：第 1 个遗物",
+            "eng": "Neow's Bones relic 1"
+          },
+          "output_type": "relic",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "bones_relics",
+          "notes": ""
+        },
+        {
+          "template_id": "neows_bones_relic_2",
+          "label": {
+            "zhs": "涅奥骨骰：第 2 个遗物",
+            "eng": "Neow's Bones relic 2"
+          },
+          "output_type": "relic",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "bones_relics",
+          "notes": ""
+        },
+        {
+          "template_id": "neows_bones_curse",
+          "label": {
+            "zhs": "涅奥骨骰：诅咒",
+            "eng": "Neow's Bones curse"
+          },
+          "output_type": "curse",
+          "match_modes": [
+            "contains",
+            "blacklist"
+          ],
+          "source_key": "curse",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": true,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsBones.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:102",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsBones.cs:38",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsBones.cs:31",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsBones.cs:41",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/NeowsBones.cs:44"
+        ],
+        "notes": "NeowsBones shuffles valid Neow relics, takes two relics, and adds one curse."
+      },
+      "notes": "NeowsBones shuffles valid Neow relics, takes two relics, and adds one curse.",
+      "warnings": []
+    },
+    "PrecariousShears": {
+      "canonical_id": "PrecariousShears",
+      "source_id": "PRECARIOUS_SHEARS",
+      "display_name": {
+        "zhs": "危险剪刀",
+        "eng": "Precarious Shears"
+      },
+      "aliases": [
+        "PRECARIOUS_SHEARS",
+        "PrecariousShears"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "precarious_shears_remove_damage",
+          "label": {
+            "zhs": "危险剪刀：删牌并受伤",
+            "eng": "Precarious Shears remove card and take damage"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.PrecariousShears",
+          "notes": ""
+        }
+      ],
+      "affects_rng": false,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "confirmed",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/PrecariousShears.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:103",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/PrecariousShears.cs:24"
+        ],
+        "notes": "Audited from relic source; process classification is represented by process_templates."
+      },
+      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "warnings": []
+    },
+    "SilkenTress": {
+      "canonical_id": "SilkenTress",
+      "source_id": "SILKEN_TRESS",
+      "display_name": {
+        "zhs": "丝绸发束",
+        "eng": "Silken Tress"
+      },
+      "aliases": [
+        "SILKEN_TRESS",
+        "SilkenTress"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "silken_tress_reward_modifier",
+          "label": {
+            "zhs": "丝绸发束：后续卡牌奖励修改",
+            "eng": "Silken Tress future card reward modifier"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.SilkenTress",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "manual_review",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/SilkenTress.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:104",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/SilkenTress.cs:42",
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/SilkenTress.cs:47"
+        ],
+        "notes": "Complex future card reward modifier; keep manual_review."
+      },
+      "notes": "Complex future card reward modifier; keep manual_review.",
+      "warnings": [
+        "complex future reward modification needs manual review"
+      ]
+    },
+    "SilverCrucible": {
+      "canonical_id": "SilverCrucible",
+      "source_id": "SILVER_CRUCIBLE",
+      "display_name": {
+        "zhs": "银坩埚",
+        "eng": "Silver Crucible"
+      },
+      "aliases": [
+        "SILVER_CRUCIBLE",
+        "SilverCrucible"
+      ],
+      "is_neow_relic": true,
+      "effect_kind": "side_effect",
+      "process_templates": [
+        {
+          "template_id": "silver_crucible_reward_modifier",
+          "label": {
+            "zhs": "银坩埚：后续卡牌奖励修改",
+            "eng": "Silver Crucible future card reward modifier"
+          },
+          "output_type": "side_effect",
+          "match_modes": [],
+          "source_key": "side_effect.SilverCrucible",
+          "notes": ""
+        }
+      ],
+      "affects_rng": true,
+      "supported_in_wpf_tag_builder": false,
+      "confidence": "manual_review",
+      "source": {
+        "rollcore_file": null,
+        "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/SilverCrucible.cs",
+        "neow_pool_source": "sts2/MegaCrit.Sts2.Core.Models.Events/Neow.cs:105",
+        "source_lines": [
+          "sts2/MegaCrit.Sts2.Core.Models.Relics/SilverCrucible.cs:94"
+        ],
+        "notes": "Complex future card reward modifier; keep manual_review."
+      },
+      "notes": "Complex future card reward modifier; keep manual_review.",
+      "warnings": [
+        "complex future reward modification needs manual review"
+      ]
+    }
+  },
+  "manual_review": [
+    {
+      "canonical_id": "SilkenTress",
+      "source_id": "SILKEN_TRESS",
+      "reason": "Complex future card reward modifier; keep manual_review.",
+      "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/SilkenTress.cs",
+      "source_lines": [
+        "sts2/MegaCrit.Sts2.Core.Models.Relics/SilkenTress.cs:42",
+        "sts2/MegaCrit.Sts2.Core.Models.Relics/SilkenTress.cs:47"
+      ]
+    },
+    {
+      "canonical_id": "SilverCrucible",
+      "source_id": "SILVER_CRUCIBLE",
+      "reason": "Complex future card reward modifier; keep manual_review.",
+      "source_file": "sts2/MegaCrit.Sts2.Core.Models.Relics/SilverCrucible.cs",
+      "source_lines": [
+        "sts2/MegaCrit.Sts2.Core.Models.Relics/SilverCrucible.cs:94"
+      ]
+    }
+  ]
+}

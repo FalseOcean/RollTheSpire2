@@ -1,0 +1,21 @@
+# .NET build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# User-local generated state
+profiles/unlock_profile.json
+profiles/database/*.json
+profiles/database/*.tsv
+profiles/database/*.txt
+profiles/database/*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.user
+.vs/
+.idea/
+publish/
+*.suo

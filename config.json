@@ -1,0 +1,298 @@
+{
+  "data_file": "data/legacy/sts2_runtime_legacy_v2.json",
+  "seed_generation": {
+    "mode": "normal",
+    "length": 10
+  },
+  "player": {
+    "character": "IRONCLAD",
+    "net_id": "1",
+    "players_count": 1,
+    "ascension_scarcity": true
+  },
+  "shared": {
+    "colorless_card_pool": "ColorlessCardPool",
+    "curse_card_pool": "CurseCardPool",
+    "shared_relic_pool": "SharedRelicPool",
+    "shared_potion_pool": "SharedPotionPool"
+  },
+  "predict": {
+    "simulate_bones_paths": false,
+    "simulate_direct_neow_options": true,
+    "show_passive_relics": false,
+    "show_relic_effects": true,
+    "show_card_rewards": true,
+    "show_transformations": true,
+    "show_potions": true,
+    "show_random_relics": true
+  },
+  "analysis": {
+    "predict_relic_sequence": false,
+    "show_relic_sequence": false,
+    "relic_sequence_limit": 30
+  },
+  "event_queue": {
+    "enabled": true,
+    "show": true,
+    "limit_per_act": 10,
+    "events": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": []
+    },
+    "filter_limit_per_act": 10
+  },
+  "shop_relics": {
+    "enabled": false,
+    "show": false,
+    "limit": 5,
+    "scope": "target",
+    "require_relics": [],
+    "blacklist": [],
+    "require_relic_filters": []
+  },
+  "kaleidoscope": {
+    "character_order": [
+      "IRONCLAD",
+      "SILENT",
+      "DEFECT",
+      "NECROBINDER",
+      "REGENT"
+    ],
+    "choice_indices": [
+      0,
+      0
+    ]
+  },
+  "bones": {
+    "pick_order": "both"
+  },
+  "choices": {
+    "HeftyTablet": 0,
+    "LeadPaperweight": 0,
+    "LostCoffer": 0,
+    "NewLeafSelectedCard": "starter_basic"
+  },
+  "search": {
+    "start": 0,
+    "end": 100000,
+    "max_results": 1,
+    "print_every": 1000,
+    "save_results": false,
+    "output_file": "results.txt"
+  },
+  "filters": {
+    "require_bones": false,
+    "neow_options": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": []
+    },
+    "bones_relics": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": []
+    },
+    "predicted_relics": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": []
+    },
+    "transformed_cards": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": []
+    },
+    "kaleidoscope_cards": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": [],
+      "selected_only": false
+    },
+    "card_opportunities": {
+      "own": {
+        "enabled": false,
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": [],
+        "rarities": [],
+        "min_count": 0
+      },
+      "colorless": {
+        "enabled": false,
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": [],
+        "rarities": [],
+        "min_count": 0
+      },
+      "other": {
+        "enabled": false,
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": [],
+        "rarities": [],
+        "min_count": 0
+      }
+    },
+    "bones_curse": {
+      "whitelist_any": [],
+      "blacklist": []
+    },
+    "effects": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": []
+    },
+    "potions": {
+      "whitelist_any": [],
+      "whitelist_all": [],
+      "blacklist": []
+    },
+    "neow_process": {
+      "route": "any",
+      "initial_relics": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "bones_relics": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "generated_relics": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "cards": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "potions": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "curse": {
+        "whitelist_any": [],
+        "blacklist": []
+      },
+      "source_cards": {
+        "Kaleidoscope": {
+          "whitelist_any": [],
+          "whitelist_all": [],
+          "blacklist": []
+        },
+        "LeafyPoultice": {
+          "whitelist_any": [],
+          "whitelist_all": [],
+          "blacklist": []
+        },
+        "NeowsTorment": {
+          "whitelist_any": [],
+          "whitelist_all": [],
+          "blacklist": []
+        }
+      },
+      "source_potions": {
+        "PhialHolster": {
+          "whitelist_any": [],
+          "whitelist_all": [],
+          "blacklist": []
+        }
+      },
+      "source_relics": {
+        "SmallCapsule": {
+          "whitelist_any": [],
+          "whitelist_all": [],
+          "blacklist": []
+        },
+        "LargeCapsule": {
+          "whitelist_any": [],
+          "whitelist_all": [],
+          "blacklist": []
+        },
+        "LavaRockAct1Boss": {
+          "whitelist_any": [],
+          "whitelist_all": [],
+          "blacklist": []
+        }
+      }
+    },
+    "neow_final": {
+      "relics": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "cards": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "potions": {
+        "whitelist_any": [],
+        "whitelist_all": [],
+        "blacklist": []
+      },
+      "curses": {
+        "whitelist_any": [],
+        "blacklist": []
+      }
+    }
+  },
+  "run_mode": "singleplayer",
+  "multiplayer_self": {
+    "net_id": "1",
+    "players_count": 2
+  },
+  "players": [],
+  "players_roster": [],
+  "ancient": {
+    "enabled": false,
+    "show_options": true,
+    "ascension": 0,
+    "double_boss": "auto",
+    "conditions": {
+      "pael_goopy": true,
+      "pael_removable": true,
+      "pael_has_event_pet": false,
+      "orobas_touch": true,
+      "orobas_tooth": true,
+      "tezcatara_has_basic_strike": true,
+      "nonupeipe_swift": true,
+      "tanx_instinct": true,
+      "darv_pandora": true
+    },
+    "require_options": [],
+    "require_ancients": [],
+    "option_scope": "target"
+  },
+  "fast_core": {
+    "enabled": true,
+    "exe_path": "",
+    "threads": 0,
+    "overfetch_multiplier": 50,
+    "overfetch_min": 200,
+    "candidate_limit": 0
+  },
+  "unlock_profile": {
+    "mode": "all_unlocked",
+    "path": "profiles/unlock_profile.json"
+  },
+  "multiplayer_unlock_mode": "all_unlocked",
+  "ui": {
+    "language": "zhs"
+  },
+  "id_convention": {
+    "canonical_id": "CamelCase runtime id",
+    "source_id": "UPPER_SNAKE_CASE source/localization id"
+  },
+  "rng": {
+    "version": "sts2_0_107_xoshiro"
+  },
+  "game_rng_version": "sts2_0_107_xoshiro"
+}

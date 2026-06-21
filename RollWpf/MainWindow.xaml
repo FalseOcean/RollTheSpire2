@@ -1,0 +1,1344 @@
+<Window x:Class="RollWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RollTheSpire2 v2.1.0" Height="860" Width="1420" MinHeight="720" MinWidth="1120"
+        Background="{StaticResource AppBackground}" FontFamily="Microsoft YaHei UI">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Top" Margin="20,22,20,12">
+                    <TextBlock Text="RollTheSpire2" Foreground="White" FontSize="26" FontWeight="Bold" />
+                    <TextBlock Text="Slay the Spire 2" Foreground="#9CA3AF" FontSize="13" Margin="0,4,0,18" />
+                    <Button x:Name="NavConfigButton" Content="配置" Click="NavConfig_Click" />
+                    <Button x:Name="NavAnalyzeButton" Content="单种分析" Click="NavAnalyze_Click" />
+                    <Button x:Name="NavSearchButton" Content="批量筛种" Click="NavSearch_Click" />
+                    <Button x:Name="NavSearchResultsButton" Content="筛种结果" Click="NavSearchResults_Click" />
+                    <Button x:Name="NavHistoryButton" Content="种子收藏" Click="NavHistory_Click" />
+                    <Button x:Name="NavCandidateButton" Content="粗筛库" Click="NavCandidate_Click" />
+                    <Button x:Name="NavEventsButton" Content="事件百科" Click="NavEvents_Click" />
+                    <Button x:Name="NavLogButton" Content="运行日志" Click="NavLog_Click" />
+                    <Button x:Name="NavStatusButton" Content="数据状态" Click="NavStatus_Click" />
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" Margin="18" >
+                    <TextBlock Text="v2.1.0" Foreground="#D1D5DB" FontSize="12" />
+                    <TextBlock x:Name="SidebarStatusText" Text="RollCore 已引用" Foreground="#9CA3AF" TextWrapping="Wrap" FontSize="12" Margin="0,4,0,0" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="22">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="0" Margin="0,0,0,16">
+                <StackPanel DockPanel.Dock="Left">
+                    <TextBlock x:Name="PageTitleText" Text="单种分析" FontSize="26" FontWeight="Bold" Foreground="#111827" />
+                    <TextBlock x:Name="PageSubtitleText" Text="RollTheSpire2 桌面版：单种分析 / 批量筛种 / 收藏库 / 粗筛库。" FontSize="13" Foreground="{StaticResource MutedTextBrush}" Margin="0,4,0,0" />
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="打开配置" Click="OpenConfig_Click" />
+                    <Button Content="打开项目目录" Click="OpenProject_Click" />
+                </StackPanel>
+            </DockPanel>
+
+            <Grid Grid.Row="1">
+                <ScrollViewer x:Name="ConfigPage" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                    <StackPanel>
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="基础配置" FontSize="18" FontWeight="SemiBold" />
+                                <TextBlock Text="WPF 当前读取项目根目录 config.json，并在运行时临时覆盖常用项；不会直接改写你的原始配置。" Foreground="{StaticResource MutedTextBrush}" Margin="0,6,0,12" />
+                                <UniformGrid Columns="2">
+                                    <StackPanel>
+                                        <TextBlock Text="项目根目录" />
+                                        <TextBox x:Name="RootDirTextBox" IsReadOnly="True" />
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="配置文件" />
+                                        <TextBox x:Name="ConfigPathTextBox" IsReadOnly="True" />
+                                    </StackPanel>
+                                </UniformGrid>
+                                <StackPanel Margin="0,12,0,0">
+                                    <TextBlock Text="游戏 RNG 版本" />
+                                    <ComboBox x:Name="GameRngVersionComboBox" SelectedValuePath="Tag" ToolTip="v2 默认使用 STS2 v0.107.1+ 的 xoshiro256**。Legacy 仅用于旧游戏版本 / v1.x 结果复查。">
+                                        <ComboBoxItem Content="STS2 v0.107.1+ / xoshiro256**（新版，推荐）" Tag="sts2_0_107_xoshiro" IsSelected="True" />
+                                        <ComboBoxItem Content="Legacy / v1.x 旧 RNG" Tag="legacy" />
+                                    </ComboBox>
+                                    <TextBlock Text="注意：用户可见 seed 仍按源码默认 10 位处理；新版多人 RNG 使用玩家槽位 / Lobby 顺序，不再用 NetId 派生。" Foreground="{StaticResource MutedTextBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,6,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="玩家存档 / 解锁档案" FontSize="18" FontWeight="SemiBold" />
+                                <TextBlock Text="导入 progress.save 后会生成 profiles/unlock_profile.json。默认不勾选时使用全解锁模式；勾选后才按 progress.save 限制卡牌、遗物、药水、事件等解锁池。单人仍使用 net_id=1；progress.save 的 unique_id 只用于识别档案。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,6,0,12" />
+                                <DockPanel Margin="0,0,0,8">
+                                    <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                        <Button Content="自动导入默认 progress.save" Click="AutoImportProgressSave_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                        <Button Content="手动导入 progress.save" Click="ImportProgressSave_Click" Margin="8,0,0,0" />
+                                    </WrapPanel>
+                                    <CheckBox x:Name="UseProgressProfileCheckBox" Content="按 progress.save 限制解锁池" VerticalAlignment="Center" IsChecked="False" ToolTip="不勾选时使用默认全解锁模式；勾选后按导入的 progress.save / unlock_profile.json 过滤解锁池。" />
+                                </DockPanel>
+                                <TextBlock Text="默认会扫描 SlayTheSpire2\steam\&lt;SteamID&gt;\profileN\saves\progress.save 与 modded\profileN\saves\progress.save；如果不在这些位置，可手动导入。" Foreground="{StaticResource MutedTextBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,6" />
+                                <TextBox x:Name="UnlockProfilePathTextBox" IsReadOnly="True" FontFamily="Consolas, Microsoft YaHei UI" Text="profiles/unlock_profile.json" />
+                                <TextBlock x:Name="UnlockProfileStatusText" Text="当前：默认全解锁。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="单人 / 多人运行模式" FontSize="18" FontWeight="SemiBold" />
+                                <TextBlock Text="多人配置保留在配置页；v0.107+ 新版 RNG 按 Lobby Players 最终列表顺序 / 玩家槽位派生 PlayerRng，NetId 只作为身份备注。筛种页会提示当前你是谁；筛种页改角色会同步到目标玩家。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,6,0,12" />
+                                <UniformGrid Columns="2" Margin="0,0,0,8">
+                                    <StackPanel Margin="0,0,8,0">
+                                        <TextBlock Text="运行模式" />
+                                        <ComboBox x:Name="RunModeComboBox" SelectionChanged="RunModeComboBox_SelectionChanged">
+                                            <ComboBoxItem Content="单人" Tag="singleplayer" IsSelected="True" />
+                                            <ComboBoxItem Content="多人" Tag="multiplayer" />
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,8,0">
+                                        <TextBlock Text="玩家数" />
+                                        <ComboBox x:Name="MultiplayerPlayersCountComboBox" SelectionChanged="MultiplayerPlayersCountComboBox_SelectionChanged">
+                                            <ComboBoxItem Content="2" Tag="2" IsSelected="True" />
+                                            <ComboBoxItem Content="3" Tag="3" />
+                                            <ComboBoxItem Content="4" Tag="4" />
+                                            <ComboBoxItem Content="5" Tag="5" />
+                                            <ComboBoxItem Content="6" Tag="6" />
+                                            <ComboBoxItem Content="7" Tag="7" />
+                                            <ComboBoxItem Content="8" Tag="8" />
+                                        </ComboBox>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <DockPanel Margin="0,4,0,10">
+                                    <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                        <Button Content="添加玩家" Width="92" Click="AddMultiplayerPlayer_Click" />
+                                        <Button Content="清空列表" Width="92" Click="ClearMultiplayerPlayers_Click" Background="#FF6B6B" Foreground="White" />
+                                    </WrapPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="多人玩家表 / 加入顺序" FontWeight="SemiBold" />
+                                        <TextBlock Text="  ·  行顺序会影响预测" Foreground="{StaticResource MutedTextBrush}" />
+                                    </StackPanel>
+                                </DockPanel>
+
+                                <TextBlock Text="按 host 发出的 Lobby Players 最终列表顺序填写；行号就是 v0.107+ RNG 的 player slot index。NetId 可填 NetId / 身份备注，但新版 RNG 不用它派生。目标玩家会同步到单种/筛种页当前角色。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,0,0,8" />
+
+                                <ItemsControl x:Name="MultiplayerPlayersItemsControl" Margin="0,0,0,8" HorizontalAlignment="Stretch">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#F8FAFC" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,0,0,8" HorizontalAlignment="Stretch">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="52" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="236" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Border Grid.Column="0" Width="36" Height="36" Background="#E0F2FE" BorderBrush="#BAE6FD" BorderThickness="1" CornerRadius="18" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                        <TextBlock Text="{Binding Order}" FontSize="16" FontWeight="Bold" Foreground="#0369A1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+
+                                                    <StackPanel Grid.Column="1" Margin="4,0,12,0">
+                                                        <DockPanel Margin="0,0,0,6">
+                                                            <CheckBox DockPanel.Dock="Left" Content="参与" IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="MultiplayerRosterFieldChanged" Unchecked="MultiplayerRosterFieldChanged" Foreground="#15803D" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                                            <TextBlock Text="按加入顺序排列；右侧按钮可把该玩家设为当前单种/筛种目标。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" FontSize="12" Margin="12,0,0,0" VerticalAlignment="Center" />
+                                                        </DockPanel>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="1.05*" />
+                                                                <ColumnDefinition Width="1.35*" />
+                                                                <ColumnDefinition Width="1.05*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                                                <TextBlock Text="玩家名 / 备注" Foreground="{StaticResource MutedTextBrush}" FontSize="12" />
+                                                                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="MultiplayerRosterFieldChanged" HorizontalContentAlignment="Left" />
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                                                                <TextBlock Text="NetId / 身份备注" Foreground="{StaticResource MutedTextBrush}" FontSize="12" />
+                                                                <TextBox Text="{Binding NetId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="MultiplayerRosterFieldChanged" ToolTip="填写真实 NetId / 身份备注。" HorizontalContentAlignment="Left" FontFamily="Consolas, Microsoft YaHei UI" />
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Column="2">
+                                                                <TextBlock Text="角色" Foreground="{StaticResource MutedTextBrush}" FontSize="12" />
+                                                                <ComboBox SelectedValue="{Binding Character, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Tag" SelectionChanged="MultiplayerPlayerCharacter_SelectionChanged">
+                                                                    <ComboBoxItem Content="铁甲战士（Ironclad）" Tag="IRONCLAD" />
+                                                                    <ComboBoxItem Content="静默猎手（Silent）" Tag="SILENT" />
+                                                                    <ComboBoxItem Content="故障机器人（Defect）" Tag="DEFECT" />
+                                                                    <ComboBoxItem Content="亡灵契约师（Necrobinder）" Tag="NECROBINDER" />
+                                                                    <ComboBoxItem Content="储君（Regent）" Tag="REGENT" />
+                                                                </ComboBox>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                                        <UniformGrid Columns="2">
+                                                            <Button Content="上移" Click="MoveMultiplayerPlayerUp_Click" />
+                                                            <Button Content="下移" Click="MoveMultiplayerPlayerDown_Click" />
+                                                        </UniformGrid>
+                                                        <UniformGrid Columns="2" Margin="0,4,0,0">
+                                                            <Button Content="单种分析" Click="AnalyzeAsMultiplayerPlayer_Click" ToolTip="设为目标玩家，切到单种分析，并同步该玩家角色。" />
+                                                            <Button Content="批量筛种" Click="SearchAsMultiplayerPlayer_Click" ToolTip="设为目标玩家，切到批量筛种，并同步该玩家角色。" />
+                                                        </UniformGrid>
+                                                        <Button Content="删除" Click="DeleteMultiplayerPlayer_Click" Background="#F87171" Foreground="White" Margin="4,4,4,0" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBox x:Name="TargetNetIdTextBox" Text="1" Visibility="Collapsed" TextChanged="TargetNetIdTextBox_TextChanged" />
+                                <TextBox x:Name="MultiplayerPlayersTextBox" Text="1:IRONCLAD, 2:SILENT" Visibility="Collapsed" TextChanged="MultiplayerPlayersTextBox_TextChanged" />
+                                <TextBlock x:Name="MultiplayerStatusText" Text="当前：单人模式，net_id=1。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="高级设置" FontSize="18" FontWeight="SemiBold" />
+                                <TextBlock Text="这里放低频、偏整活或实验性的筛种能力；默认关闭，避免普通筛种流程被复杂选项污染。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,6,0,12" />
+                                <CheckBox x:Name="EnableAdvancedNewLeafCheckBox" Content="启用高级新叶：允许在筛种器里指定新叶变化的原始牌来源" IsChecked="False" ToolTip="关闭时，新叶始终按普通本职业基础牌变化逻辑筛选；打开后，在骨骰路线选择新叶时可额外指定铅制镇纸、万花筒、沉重石板等来源。" />
+                                <TextBlock x:Name="AdvancedNewLeafConfigHintText" Text="当前：高级新叶关闭。筛种器里的新叶按普通模式处理。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="22,6,0,8" />
+                                <CheckBox x:Name="AnalyzeDetailedMapBossCheckBox" Content="单种分析地图/Boss 使用详细模式（显示怪物/精英队列）" IsChecked="False" ToolTip="默认关闭，只显示 Act 与 Boss；需要核对地图/怪物队列时再开启。" />
+                                <CheckBox x:Name="AnalyzeShowFullEventQueueCheckBox" Content="单种分析事件队列显示完整队列（包含当前 Act 必跳过事件）" IsChecked="False" ToolTip="默认关闭：事件队列会隐藏当前 Act 必定不会自然出现的事件；开启后显示完整原始读取队列。" Margin="0,6,0,0" />
+                                <CheckBox x:Name="MultiplayerUseProfileCheckBox" Content="多人模式也使用当前 progress.save 解锁档案近似" ToolTip="默认多人使用全解锁；勾选后写入 multiplayer_unlock_mode=profile，只用当前导入档案近似目标玩家解锁状态。" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="WPF 阶段说明" FontSize="18" FontWeight="SemiBold" />
+                                <TextBlock Text="当前主线是 WPF 批量筛种与 Tag Builder。单种分析已接入 Neow / 商店 / 先古 / 多人基础配置与结果卡片，但部分高级 Tag 的解释展示仍会逐步补齐。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Grid x:Name="AnalyzePage">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource Card}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1.05*" />
+                                <ColumnDefinition Width="0.75*" />
+                                <ColumnDefinition Width="0.9*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Seed" />
+                                <TextBox x:Name="SeedTextBox" Text="ABC123" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="角色" />
+                                <ComboBox x:Name="CharacterComboBox" SelectedValuePath="Tag">
+                                    <ComboBoxItem Content="铁甲战士（Ironclad）" Tag="IRONCLAD" IsSelected="True" />
+                                    <ComboBoxItem Content="静默猎手（Silent）" Tag="SILENT" />
+                                    <ComboBoxItem Content="故障机器人（Defect）" Tag="DEFECT" />
+                                    <ComboBoxItem Content="亡灵契约师（Necrobinder）" Tag="NECROBINDER" />
+                                    <ComboBoxItem Content="储君（Regent）" Tag="REGENT" />
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="进阶等级（0-10）" />
+                                <ComboBox x:Name="AnalyzeAscensionComboBox" SelectedIndex="0" ToolTip="STS2 当前进阶上限为 A10；A7 起自动使用高进阶稀有卡降低档。">
+                                    <ComboBoxItem Content="A0" Tag="0" />
+                                    <ComboBoxItem Content="A1" Tag="1" />
+                                    <ComboBoxItem Content="A2" Tag="2" />
+                                    <ComboBoxItem Content="A3" Tag="3" />
+                                    <ComboBoxItem Content="A4" Tag="4" />
+                                    <ComboBoxItem Content="A5" Tag="5" />
+                                    <ComboBoxItem Content="A6" Tag="6" />
+                                    <ComboBoxItem Content="A7" Tag="7" />
+                                    <ComboBoxItem Content="A8" Tag="8" />
+                                    <ComboBoxItem Content="A9" Tag="9" />
+                                    <ComboBoxItem Content="A10" Tag="10" />
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="3">
+                                <TextBlock Text="事件数量 / Act" />
+                                <TextBox x:Name="EventLimitTextBox" Text="10" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="4" VerticalAlignment="Bottom" Orientation="Horizontal">
+                                <CheckBox x:Name="EnableEventCheckBox" Content="事件" IsChecked="True" VerticalAlignment="Center" Margin="8,0" />
+                                <CheckBox x:Name="EnableShopCheckBox" Content="商店" VerticalAlignment="Center" Margin="8,0" />
+                                <CheckBox x:Name="EnableAncientCheckBox" Content="先古" VerticalAlignment="Center" Margin="8,0" />
+                                <CheckBox x:Name="AnalyzeMapBossCheckBox" Content="地图/Boss" ToolTip="默认只显示 Act 与 Boss；详细模式在配置页高级设置里开启。" VerticalAlignment="Center" Margin="8,0" />
+                                <CheckBox x:Name="AnalyzeRelicSequenceCheckBox" Content="普通遗物序列" ToolTip="查看普通 / 罕见 / 稀有遗物队列；商店专属遗物请使用“商店”开关。" VerticalAlignment="Center" Margin="8,0" />
+                                <Button x:Name="AnalyzeButton" Content="开始分析" Click="Analyze_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" />
+                                <Button Content="收藏当前" Click="SaveAnalyzeToHistory_Click" ToolTip="把当前单种分析结果保存到搜索历史 / 收藏库。" />
+                            </StackPanel>
+                            <DockPanel Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0">
+                                <TextBlock DockPanel.Dock="Left" Text="普通遗物序列数量" VerticalAlignment="Center" Foreground="{StaticResource MutedTextBrush}" Margin="4,0,8,0" />
+                                <ComboBox x:Name="AnalyzeRelicSequenceLimitComboBox" DockPanel.Dock="Left" Width="86" SelectedIndex="3" ToolTip="单种分析里 Common / Uncommon / Rare 普通遗物队列各显示多少个。默认 15。">
+                                    <ComboBoxItem Content="5" Tag="5" />
+                                    <ComboBoxItem Content="8" Tag="8" />
+                                    <ComboBoxItem Content="10" Tag="10" />
+                                    <ComboBoxItem Content="15" Tag="15" IsSelected="True" />
+                                    <ComboBoxItem Content="20" Tag="20" />
+                                    <ComboBoxItem Content="30" Tag="30" />
+                                </ComboBox>
+                                <TextBlock Text="只影响“普通遗物序列”，不影响商店专属遗物前 8 个。" VerticalAlignment="Center" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="8,0,0,0" />
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                    <StackPanel Grid.Row="1" Margin="0,0,0,8">
+                        <Expander x:Name="AnalyzeAdvancedNewLeafExpander" Header="单种分析 · 高级新叶（仅骨骰路线，可选）" IsExpanded="False" Margin="0,0,0,8">
+                            <Border Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <TextBlock Text="高级新叶只影响骨骰路线中的 NewLeaf；直接 Neow 三选一拿新叶仍按普通初始牌变化处理。配置页未启用高级新叶时，这里不会生效。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,0,0,8" />
+                                    <CheckBox x:Name="AnalyzeUseAdvancedNewLeafCheckBox" Content="单种分析使用高级新叶原始牌来源（仅骨骰路线）" IsChecked="False" ToolTip="勾选后，单种分析会把下面的来源写入 choices.NewLeafSelectedCard；RollCore 只在骨骰路线应用，直接 Neow 路线不应用。" />
+                                    <DockPanel Margin="22,8,0,0">
+                                        <TextBlock DockPanel.Dock="Left" Text="原始牌来源" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                        <ComboBox x:Name="AnalyzeNewLeafSourceComboBox" SelectedIndex="0" MinWidth="260" ToolTip="选择新叶要变化哪类已进入牌组的原始牌。">
+                                            <ComboBoxItem Content="默认：本职业基础牌" Tag="starter_basic" />
+                                            <ComboBoxItem Content="铅制镇纸给的无色卡" Tag="source:LeadPaperweight:any" />
+                                            <ComboBoxItem Content="万花筒给的其它职业卡" Tag="source:Kaleidoscope:any" />
+                                            <ComboBoxItem Content="失物盒选中的卡" Tag="source:LostCoffer:any" />
+                                            <ComboBoxItem Content="沉重石板给的 Injury" Tag="source:HeftyTablet:Injury" />
+                                            <ComboBoxItem Content="涅奥的苦痛给的 NeowsFury" Tag="source:NeowsTorment:NeowsFury" />
+                                        </ComboBox>
+                                    </DockPanel>
+                                    <TextBlock x:Name="AnalyzeAdvancedNewLeafHintText" Text="当前：单种分析高级新叶未启用。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="22,6,0,0" />
+                                </StackPanel>
+                            </Border>
+                        </Expander>
+                        <Expander Header="单种分析 · 先古状态预设" IsExpanded="False" Margin="0,0,0,8">
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="单种分析默认启用这些先古状态预设；需要按当前局内状态微调时，展开这里调整勾选项即可。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,0,0,8" />
+                                <CheckBox x:Name="AnalyzeUseAncientPresetCheckBox" Content="启用以下单种分析先古状态预设" IsChecked="True" Visibility="Collapsed" />
+                                <UniformGrid Columns="2" Margin="0,8,0,0">
+                                    <CheckBox x:Name="AnalyzeAncientPaelGoopyCheckBox" Content="Pael: Gooopy 可附魔防御牌 ≥ 3" IsChecked="True" />
+                                    <CheckBox x:Name="AnalyzeAncientPaelRemovableCheckBox" Content="Pael: 可移除牌 ≥ 5" IsChecked="True" />
+                                    <CheckBox x:Name="AnalyzeAncientPaelHasEventPetCheckBox" Content="Pael: 已有事件宠物" />
+                                    <CheckBox x:Name="AnalyzeAncientOrobasTouchCheckBox" Content="Orobas: TouchOfOrobas 条件满足" IsChecked="True" />
+                                    <CheckBox x:Name="AnalyzeAncientOrobasToothCheckBox" Content="Orobas: ArchaicTooth 条件满足" IsChecked="True" />
+                                    <CheckBox x:Name="AnalyzeAncientTezcataraBasicStrikeCheckBox" Content="Tezcatara: 还有 Basic Strike" IsChecked="True" />
+                                    <CheckBox x:Name="AnalyzeAncientNonupeipeSwiftCheckBox" Content="Nonupeipe: Swift 可附魔牌 ≥ 4" IsChecked="True" />
+                                    <CheckBox x:Name="AnalyzeAncientTanxInstinctCheckBox" Content="Tanx: Instinct 可附魔牌 ≥ 3" IsChecked="True" />
+                                    <CheckBox x:Name="AnalyzeAncientDarvPandoraCheckBox" Content="Darv: 允许潘多拉魔盒出现" IsChecked="True" />
+                                </UniformGrid>
+                            </StackPanel>
+                        </Border>
+                    </Expander>
+                    </StackPanel>
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="上方卡片用于快速看重点；下方保留原始详情文本，方便复制与核对。" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" Margin="0,0,12,0" />
+                                <Button Content="复制结果" Click="CopyAnalyze_Click" />
+                                <Button Content="清空" Click="ClearAnalyze_Click" />
+                            </StackPanel>
+                            <ItemsControl x:Name="AnalyzeCardsListBox" Margin="0,0,0,8">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="10" Padding="12" Margin="4,5" HorizontalAlignment="Stretch">
+                                            <StackPanel MaxWidth="1040">
+                                                <DockPanel>
+                                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="15" Foreground="#111827" />
+                                                    <Border DockPanel.Dock="Right" Background="#DBEAFE" CornerRadius="8" Padding="8,2" Margin="8,0,0,0">
+                                                        <TextBlock Text="{Binding Badge}" Foreground="#1D4ED8" FontSize="12" />
+                                                    </Border>
+                                                </DockPanel>
+                                                <ItemsControl ItemsSource="{Binding Lines}" Margin="0,8,0,0">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Foreground="{Binding ForegroundBrush}" FontWeight="{Binding FontWeight}" Margin="0,2" ToolTip="{Binding ToolTip}" />
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Text="原始详情" Foreground="{StaticResource MutedTextBrush}" Margin="4,8,0,4" />
+                            <TextBox x:Name="AnalyzeOutputBox" FontFamily="Consolas, Microsoft YaHei UI" FontSize="13" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" IsReadOnly="True" MinHeight="180" MaxHeight="360" />
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Grid>
+
+                <Grid x:Name="SearchPage" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Border Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <TextBlock Text="批量筛种 · 基础设置" FontSize="18" FontWeight="SemiBold" />
+                                    <TextBlock Text="上方负责基础配置；中段左侧添加筛选要求，右侧汇总当前 tag；底部只显示简易进度，完整命中请到“筛种结果”页查看。Neow 支持“不筛选 / 过程导向 / 最终结果导向”；商店和先古条件统一汇总到右侧 Tag。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,6,0,12" />
+                                    <WrapPanel>
+                                        <StackPanel Width="140" Margin="0,0,12,8">
+                                            <TextBlock Text="start" />
+                                            <TextBox x:Name="SearchStartTextBox" Text="0" />
+                                        </StackPanel>
+                                        <StackPanel Width="150" Margin="0,0,12,8">
+                                            <TextBlock Text="end / attempts" />
+                                            <TextBox x:Name="SearchEndTextBox" Text="100000" />
+                                        </StackPanel>
+                                        <StackPanel Width="130" Margin="0,0,12,8">
+                                            <TextBlock Text="max results" />
+                                            <TextBox x:Name="SearchMaxResultsTextBox" Text="1" />
+                                        </StackPanel>
+                                        <StackPanel Width="170" Margin="0,0,12,8">
+                                            <TextBlock Text="seed 模式" />
+                                            <ComboBox x:Name="SearchModeComboBox" ToolTip="从 0 开始=0,1,2... 转游戏 seed；从 0000000000 开始=10 位补零；随机十位种子=游戏原生随机长度。">
+                                                <ComboBoxItem Content="从 0 开始" Tag="sequential" />
+                                                <ComboBoxItem Content="从 0000000000 开始" Tag="fixed" />
+                                                <ComboBoxItem Content="随机十位种子" Tag="random" IsSelected="True" />
+                                                <ComboBoxItem Content="从粗筛候选池读取" Tag="candidate_pool" />
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Width="230" Margin="0,0,12,8">
+                                            <TextBlock Text="粗筛候选池" />
+                                            <ComboBox x:Name="CandidatePoolComboBox" DisplayMemberPath="Name" ToolTip="seed 模式选择“从粗筛候选池读取”时生效。" />
+                                        </StackPanel>
+                                        <StackPanel Width="140" Margin="0,0,12,8">
+                                            <TextBlock Text="角色" />
+                                            <ComboBox x:Name="SearchCharacterComboBox" SelectedValuePath="Tag">
+                                                <ComboBoxItem Content="铁甲战士（Ironclad）" Tag="IRONCLAD" IsSelected="True" />
+                                                <ComboBoxItem Content="静默猎手（Silent）" Tag="SILENT" />
+                                                <ComboBoxItem Content="故障机器人（Defect）" Tag="DEFECT" />
+                                                <ComboBoxItem Content="亡灵契约师（Necrobinder）" Tag="NECROBINDER" />
+                                                <ComboBoxItem Content="储君（Regent）" Tag="REGENT" />
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Width="120" Margin="0,0,12,8">
+                                            <TextBlock Text="进阶（0-10）" />
+                                            <ComboBox x:Name="SearchAscensionComboBox" SelectedIndex="0" ToolTip="STS2 当前进阶上限为 A10；A7 起自动使用高进阶稀有卡降低档。">
+                                                <ComboBoxItem Content="A0" Tag="0" />
+                                                <ComboBoxItem Content="A1" Tag="1" />
+                                                <ComboBoxItem Content="A2" Tag="2" />
+                                                <ComboBoxItem Content="A3" Tag="3" />
+                                                <ComboBoxItem Content="A4" Tag="4" />
+                                                <ComboBoxItem Content="A5" Tag="5" />
+                                                <ComboBoxItem Content="A6" Tag="6" />
+                                                <ComboBoxItem Content="A7" Tag="7" />
+                                                <ComboBoxItem Content="A8" Tag="8" />
+                                                <ComboBoxItem Content="A9" Tag="9" />
+                                                <ComboBoxItem Content="A10" Tag="10" />
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <CheckBox x:Name="SearchAscensionScarcityCheckBox" Visibility="Collapsed" IsChecked="False" />
+                                    </WrapPanel>
+                                    <DockPanel Margin="0,10,0,0">
+                                        <StackPanel>
+                                            <TextBlock x:Name="SearchProfileHintText" Text="解锁档案：默认全解锁" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" />
+                                            <TextBlock x:Name="SearchRunModeHintText" Text="运行模式：单人 net_id=1" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <TextBlock x:Name="SearchPresetStatusText" Text="筛选预设：未载入" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" Margin="0,0,12,0" />
+                                            <Button Content="保存当前筛选条件" Click="SaveSearchPreset_Click" ToolTip="保存当前批量筛种页的基础设置、Neow / 商店 / 先古 / 事件等筛选条件，以及多人相关配置。" />
+                                            <Button Content="加载筛选条件" Click="LoadSearchPreset_Click" ToolTip="从 preset JSON 恢复批量筛种页筛选条件。" />
+                                            <Button Content="清空筛选条件" Click="ClearSearchFilters_Click" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <Grid Margin="0,0,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2.1*" />
+                                    <ColumnDefinition Width="0.95*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,0,12,0">
+                                    <TextBlock Text="中段 · 添加 seed 要求" FontSize="18" FontWeight="SemiBold" Margin="2,0,0,8" />
+                            <Expander Header="Neow 开局筛选" IsExpanded="True" Margin="0,0,0,12">
+                                <Border Style="{StaticResource Card}" Margin="0">
+                                    <StackPanel>
+                                        <TextBlock Text="Neow 筛选改成互斥模式：不筛选 / 过程导向 / 最终结果导向三选一。过程导向关心来源与路线；最终结果导向只关心最后拿到了什么。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,0,0,8" />
+                                        <UniformGrid Columns="2" Margin="0,0,0,12">
+                                            <StackPanel>
+                                                <TextBlock Text="Neow 高级筛选模式" />
+                                                <ComboBox x:Name="NeowFilterModeComboBox" SelectionChanged="NeowFilterModeComboBox_SelectionChanged" ToolTip="不筛选=不启用 Neow 高级筛选；过程导向=按来源/路线筛；最终结果导向=只看最终结果。">
+                                                    <ComboBoxItem Content="不筛选" Tag="none" IsSelected="True" />
+                                                    <ComboBoxItem Content="过程导向" Tag="process" />
+                                                    <ComboBoxItem Content="最终结果导向" Tag="final" />
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <TextBlock x:Name="NeowModeHintText" Text="不筛选：不启用 Neow 高级筛选。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="10,18,0,0" />
+                                        </UniformGrid>
+                                        <StackPanel x:Name="NeowProcessPanel">
+                                            <Border Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,0,0,12">
+                                                <StackPanel>
+                                                    <TextBlock Text="过程导向 Tag 构建器（原型）" FontWeight="SemiBold" FontSize="15" />
+                                                    <TextBlock Text="先回答是否必须走骨骰；选择“是”时展开骨骰遗物和骨骰诅咒；选择“否”表示不看骨骰路线，只筛直接 Neow 遗物/效果。选择“不定向”代表只要求骨骰，不继续指定任何骨骰遗物。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,4,0,10" />
+                                                    <UniformGrid Columns="3" Margin="0,0,0,10">
+                                                        <StackPanel Margin="0,0,8,0">
+                                                            <TextBlock Text="是否要求骨骰" />
+                                                            <ComboBox x:Name="BonesRequirementComboBox" SelectionChanged="TagBuilderChanged" ToolTip="是=必须走骨骰；否=不看骨骰路线，只筛直接 Neow 遗物/效果。完全不筛 Neow 请选“不筛选”。">
+                                                                <ComboBoxItem Content="是，必须走骨骰" Tag="yes" IsSelected="True" />
+                                                                <ComboBoxItem Content="否，只看直接 Neow" Tag="no" />
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                        <StackPanel x:Name="BonesRelicModePanel" Margin="0,0,8,0">
+                                                            <TextBlock Text="骨骰遗物要求" />
+                                                            <ComboBox x:Name="BonesRelicModeComboBox" SelectionChanged="TagBuilderChanged" ToolTip="不定向=只要求骨骰，不关心遗物；指定遗物=添加必须包含的骨骰遗物。">
+                                                                <ComboBoxItem Content="不定向" Tag="undirected" IsSelected="True" />
+                                                                <ComboBoxItem Content="指定遗物" Tag="specified" />
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                        <StackPanel x:Name="BonesCurseModePanel">
+                                                            <TextBlock Text="骨骰诅咒要求" />
+                                                            <ComboBox x:Name="BonesCurseModeComboBox" SelectionChanged="TagBuilderChanged" ToolTip="不指定=不筛诅咒；必须=白名单；禁止=黑名单。">
+                                                                <ComboBoxItem Content="不指定" Tag="none" IsSelected="True" />
+                                                                <ComboBoxItem Content="必须" Tag="require" />
+                                                                <ComboBoxItem Content="禁止" Tag="ban" />
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                    </UniformGrid>
+                                                    <Border x:Name="DirectRelicSpecifyPanel" Background="White" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,8">
+                                                        <StackPanel>
+                                                            <TextBlock Text="Neow 遗物/效果：直接 Neow" FontWeight="SemiBold" />
+                                                            <TextBlock Text="当骨骰选择“否”时，这里只指定直接 Neow 给出的遗物/效果；即使骨骰路线也能给出同一遗物，也不会按骨骰路线命中。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,8" />
+                                                            <DockPanel>
+                                                                <Button DockPanel.Dock="Right" Content="清空直接遗物" Click="ClearDirectRelicTags_Click" Margin="8,0,0,0" />
+                                                                <Button DockPanel.Dock="Right" Content="添加直接遗物 Tag" Click="AddDirectRelicTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                                                <ComboBox x:Name="DirectRelicBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="选择或输入中文名 / ID，例如：新叶、树叶药膏、万花筒" />
+                                                            </DockPanel>
+                                                            <Border x:Name="DirectSpecialRelicTemplatePanel" Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,10,0,0" Visibility="Collapsed">
+                                                                <StackPanel>
+                                                                    <TextBlock x:Name="DirectSpecialRelicTemplateTitleText" Text="直接遗物子条件" FontWeight="SemiBold" />
+                                                                    <TextBlock x:Name="DirectSpecialRelicTemplateHintText" Text="选择带有过程结果的 Neow 遗物后，这里会显示可选子条件。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,8" />
+                                                                    <StackPanel x:Name="DirectGenericEffectTemplatesPanel" />
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </StackPanel>
+                                                    </Border>
+                                                    <StackPanel x:Name="BonesDetailPanel">
+                                                        <Border x:Name="BonesRelicSpecifyPanel" Background="White" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,8">
+                                                            <StackPanel>
+                                                                <TextBlock Text="添加骨骰遗物 Tag" FontWeight="SemiBold" />
+                                                                <TextBlock Text="下拉框添加的是“骨骰结果必须包含该遗物”，不强制它出现在第几个位置。选择特殊遗物后，下方会展开可选的子条件模板。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,8" />
+                                                                <DockPanel>
+                                                                    <Button DockPanel.Dock="Right" Content="清空遗物 Tag" Click="ClearBonesRelicTags_Click" Margin="8,0,0,0" />
+                                                                    <Button DockPanel.Dock="Right" Content="添加遗物 Tag" Click="AddBonesRelicTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                                                    <ComboBox x:Name="BonesRelicBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" SelectionChanged="BonesRelicBuilderComboBox_SelectionChanged" ToolTip="选择或输入中文名 / ID，例如：新叶、树叶药膏、万花筒、失物盒" />
+                                                                </DockPanel>
+                                                                <Border x:Name="AdvancedNewLeafSourcePanel" Background="#FFF7ED" BorderBrush="#FDBA74" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,10,0,0" Visibility="Collapsed">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="高级新叶：原始牌来源" FontWeight="SemiBold" />
+                                                                        <TextBlock Text="这是偏整活的路线感知筛选。只有在配置页开启“高级新叶”，并且骨骰遗物选择新叶时才显示。骨骰最终诅咒不会作为新叶原始牌；诅咒珍珠的 Greed 因 Eternal 也不作为新叶原始牌。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,6" />
+                                                                        <DockPanel>
+                                                                            <TextBlock DockPanel.Dock="Left" Text="原始牌来源" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                                                            <ComboBox x:Name="NewLeafSourceComboBox" Width="260" SelectionChanged="NewLeafSourceComboBox_SelectionChanged" ToolTip="选择新叶要变化的原始牌来源；默认是本职业基础打击/防御。">
+                                                                                <ComboBoxItem Content="默认：本职业基础牌" Tag="starter_basic" IsSelected="True" />
+                                                                                <ComboBoxItem Content="铅制镇纸给的无色卡" Tag="source:LeadPaperweight:any" />
+                                                                                <ComboBoxItem Content="万花筒给的其它职业卡" Tag="source:Kaleidoscope:any" />
+                                                                                <ComboBoxItem Content="失物盒选中的卡" Tag="source:LostCoffer:any" />
+                                                                                <ComboBoxItem Content="沉重石板给的 Injury" Tag="source:HeftyTablet:Injury" />
+                                                                                <ComboBoxItem Content="涅奥的苦痛给的 NeowsFury" Tag="source:NeowsTorment:NeowsFury" />
+                                                                            </ComboBox>
+                                                                        </DockPanel>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                                <Border x:Name="SpecialRelicTemplatePanel" Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,10,0,0" Visibility="Collapsed">
+                                                                    <StackPanel>
+                                                                        <TextBlock x:Name="SpecialRelicTemplateTitleText" Text="特殊遗物子条件" FontWeight="SemiBold" />
+                                                                        <TextBlock x:Name="SpecialRelicTemplateHintText" Text="选择特殊遗物后，这里会显示可选子条件。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,8" />
+                                                                        <StackPanel x:Name="NewLeafTemplatePanel" Visibility="Collapsed">
+                                                                            <TextBlock Text="新叶：指定一次变化结果" FontWeight="SemiBold" />
+                                                                            <TextBlock Text="高级新叶可指定要变化的原始牌来源；只有该来源在新叶之前进入牌组时才会命中。骨骰最终诅咒不会作为新叶原始牌；诅咒珍珠 Greed 不可被新叶变化。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,4" />
+                                                                            <DockPanel Margin="0,4,0,0">
+                                                                                <TextBlock DockPanel.Dock="Left" Text="原始牌来源" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                                                                <ComboBox x:Name="NewLeafSourceComboBoxLegacy" Width="220" SelectionChanged="NewLeafSourceComboBox_SelectionChanged" ToolTip="选择新叶要变化的原始牌来源；默认是本职业基础打击/防御。">
+                                                                                    <ComboBoxItem Content="默认：本职业基础牌" Tag="starter_basic" IsSelected="True" />
+                                                                                    <ComboBoxItem Content="铅制镇纸给的无色卡" Tag="source:LeadPaperweight:any" />
+                                                                                    <ComboBoxItem Content="万花筒给的其它职业卡" Tag="source:Kaleidoscope:any" />
+                                                                                    <ComboBoxItem Content="失物盒选中的卡" Tag="source:LostCoffer:any" />
+                                                                                    <ComboBoxItem Content="沉重石板给的 Injury" Tag="source:HeftyTablet:Injury" />
+                                                                                    <ComboBoxItem Content="涅奥的苦痛给的 NeowsFury" Tag="source:NeowsTorment:NeowsFury" />
+                                                                                </ComboBox>
+                                                                            </DockPanel>
+                                                                            <DockPanel Margin="0,6,0,0">
+                                                                                <Button DockPanel.Dock="Right" Content="添加新叶变化 Tag" Click="AddNewLeafCardTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                                                                <TextBox x:Name="NewLeafCardBuilderTextBox" ToolTip="输入要变化得到的卡牌中文名或 ID" />
+                                                                            </DockPanel>
+                                                                        </StackPanel>
+                                                                        <StackPanel x:Name="KaleidoscopeTemplatePanel" Visibility="Collapsed">
+                                                                            <TextBlock Text="万花筒：给牌结果（可选组匹配）" FontWeight="SemiBold" />
+                                                                            <TextBlock Text="万花筒给两组牌，每组只能选一张；多个 Tag 会按“能否从不同组实际拿到”判断，不再做简单并集合并。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,4" />
+                                                                            <DockPanel Margin="0,4,0,0">
+                                                                                <Button DockPanel.Dock="Right" Content="添加万花筒 Tag" Click="AddKaleidoscopeGroup1Tag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                                                                <TextBox x:Name="KaleidoscopeGroup1CardTextBox" ToolTip="万花筒两组给牌结果必须可实际选择得到该卡" />
+                                                                            </DockPanel>
+                                                                            <TextBox x:Name="KaleidoscopeGroup2CardTextBox" Visibility="Collapsed" />
+                                                                        </StackPanel>
+                                                                        <StackPanel x:Name="LostCofferTemplatePanel" Visibility="Collapsed">
+                                                                            <TextBlock Text="失物盒：卡牌 + 药水" FontWeight="SemiBold" />
+                                                                            <DockPanel Margin="0,4,0,0">
+                                                                                <Button DockPanel.Dock="Right" Content="添加卡牌 Tag" Click="AddLostCofferCardTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                                                                <TextBox x:Name="LostCofferCardTextBox" ToolTip="失物盒卡牌奖励必须包含" />
+                                                                            </DockPanel>
+                                                                            <DockPanel Margin="0,6,0,0">
+                                                                                <Button DockPanel.Dock="Right" Content="添加药水 Tag" Click="AddLostCofferPotionTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                                                                <TextBox x:Name="LostCofferPotionTextBox" ToolTip="失物盒药水奖励必须包含" />
+                                                                            </DockPanel>
+                                                                        </StackPanel>
+                                                                        <StackPanel x:Name="BonesGenericEffectTemplatesPanel" />
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </StackPanel>
+                                                        </Border>
+                                                        <Border x:Name="BonesCurseSpecifyPanel" Background="White" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="8" Padding="10">
+                                                            <StackPanel>
+                                                                <TextBlock Text="添加骨骰诅咒 Tag" FontWeight="SemiBold" />
+                                                                <TextBlock Text="选择“必须”会加入诅咒白名单；选择“禁止”会加入诅咒黑名单。禁止可以连续添加多个。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,2,0,8" />
+                                                                <DockPanel>
+                                                                    <Button DockPanel.Dock="Right" Content="清空诅咒 Tag" Click="ClearBonesCurseTags_Click" Margin="8,0,0,0" />
+                                                                    <Button DockPanel.Dock="Right" Content="添加诅咒 Tag" Click="AddBonesCurseTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="8,0,0,0" />
+                                                                    <ComboBox x:Name="BonesCurseBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="从当前 RollCore 骨骰诅咒池中选择，也可以手动输入中文名 / ID。" />
+                                                                </DockPanel>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                            <StackPanel x:Name="NeowProcessLegacyFieldsPanel" Visibility="Collapsed">
+                                                <CheckBox x:Name="RequireBonesCheckBox" />
+                                                <ComboBox x:Name="NeowRouteModeComboBox">
+                                                    <ComboBoxItem Content="any" IsSelected="True" />
+                                                    <ComboBoxItem Content="direct" />
+                                                    <ComboBoxItem Content="bones" />
+                                                </ComboBox>
+                                                <TextBox x:Name="ProcessCardAnyTextBox" />
+                                                <TextBox x:Name="ProcessCardBlacklistTextBox" />
+                                                <TextBox x:Name="NeowAnyTextBox" />
+                                                <TextBox x:Name="NeowAllTextBox" />
+                                                <TextBox x:Name="NeowBlacklistTextBox" />
+                                                <TextBox x:Name="BonesRelicAnyTextBox" />
+                                                <TextBox x:Name="BonesRelicAllTextBox" />
+                                                <TextBox x:Name="BonesRelicBlacklistTextBox" />
+                                                <TextBox x:Name="BonesCurseAnyTextBox" />
+                                                <TextBox x:Name="BonesCurseBlacklistTextBox" />
+                                                <TextBox x:Name="PredictedRelicAnyTextBox" />
+                                                <TextBox x:Name="PredictedRelicAllTextBox" />
+                                                <TextBox x:Name="PredictedRelicBlacklistTextBox" />
+                                                <TextBox x:Name="NewLeafCardAllTextBox" />
+                                                <TextBox x:Name="KaleidoscopeGroup1CardAllTextBox" />
+                                                <TextBox x:Name="KaleidoscopeGroup2CardAllTextBox" />
+                                                <TextBox x:Name="LostCofferCardAllTextBox" />
+                                                <TextBox x:Name="LostCofferPotionAllTextBox" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="NeowFinalPanel" Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,12,0,0">
+                                            <StackPanel>
+                                                <TextBlock Text="最终结果导向筛选" FontWeight="SemiBold" />
+                                                <TextBlock Text="不限制来源，只看某条可选 Neow 路线最终能得到 / 不得到什么。最终普通遗物指 SmallCapsule / LargeCapsule 等生成的普通随机遗物；Neow 遗物本身请用下方“Neow 遗物”条件。诅咒包含骨骰诅咒，以及诅咒珍珠 Greed / 沉重石板 Injury 这类固定诅咒。巨大扭蛋固定 Strike + Defend 不纳入最终卡牌筛选。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,4,0,8" />
+                                                <Grid Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="110" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="最终卡牌" VerticalAlignment="Center" />
+                                                    <ComboBox Grid.Column="1" x:Name="FinalCardBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="全卡池：所有角色职业卡 + 无色卡的普通 / 罕见 / 稀有；额外包含 NeowsFury。" />
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="8,0,0,0">
+                                                        <Button Content="任一想要" Width="82" Click="AddFinalCardAnyTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                        <Button Content="全部必须" Width="82" Click="AddFinalCardAllTag_Click" Margin="0,0,6,0" />
+                                                        <Button Content="不想要" Width="70" Click="AddFinalCardBlacklistTag_Click" />
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Grid Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="110" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="最终药水" VerticalAlignment="Center" />
+                                                    <ComboBox Grid.Column="1" x:Name="FinalPotionBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="共享药水池 + 当前角色专属药水池。" />
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="8,0,0,0">
+                                                        <Button Content="任一想要" Width="82" Click="AddFinalPotionAnyTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                        <Button Content="全部必须" Width="82" Click="AddFinalPotionAllTag_Click" Margin="0,0,6,0" />
+                                                        <Button Content="不想要" Width="70" Click="AddFinalPotionBlacklistTag_Click" />
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Grid Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="110" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="最终诅咒" VerticalAlignment="Center" />
+                                                    <ComboBox Grid.Column="1" x:Name="FinalCurseBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="骨骰诅咒池 + 固定 Greed / Injury。" />
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="8,0,0,0">
+                                                        <Button Content="想要" Width="82" Click="AddFinalCurseAnyTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                        <Button Content="不想要" Width="82" Click="AddFinalCurseBlacklistTag_Click" />
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Grid Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="110" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="最终普通遗物" VerticalAlignment="Center" />
+                                                    <ComboBox Grid.Column="1" x:Name="FinalRelicBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="只显示当前角色可用的普通 / 罕见 / 稀有随机遗物；不含 Neow / 商店 / 事件 / Ancient 遗物。" />
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="8,0,0,0">
+                                                        <Button Content="任一想要" Width="82" Click="AddFinalRelicAnyTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                        <Button Content="全部必须" Width="82" Click="AddFinalRelicAllTag_Click" Margin="0,0,6,0" />
+                                                        <Button Content="不想要" Width="70" Click="AddFinalRelicBlacklistTag_Click" />
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="110" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="Neow 遗物" VerticalAlignment="Center" />
+                                                    <ComboBox Grid.Column="1" x:Name="FinalNeowRelicComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="筛选 Neow 遗物本身，例如涅奥骨骰、树叶药膏、巨大扭蛋；不包含巨大扭蛋生成的普通遗物。" />
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="8,0,0,0">
+                                                        <Button Content="必须包含" Width="82" Click="AddFinalNeowRelicAnyTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                        <Button Content="不想要" Width="82" Click="AddFinalNeowRelicBlacklistTag_Click" />
+                                                    </StackPanel>
+                                                </Grid>
+                                                <UniformGrid Columns="3" Visibility="Collapsed">
+                                                    <TextBox x:Name="FinalRelicAnyTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalRelicAllTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalRelicBlacklistTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalCardAnyTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalCardAllTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalCardBlacklistTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalCurseAnyTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalCurseBlacklistTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalPotionAnyTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalPotionAllTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalPotionBlacklistTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalNeowRelicAnyTextBox" AcceptsReturn="True" />
+                                                    <TextBox x:Name="FinalNeowRelicBlacklistTextBox" AcceptsReturn="True" />
+                                                </UniformGrid>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                            </Expander>
+
+                            <Expander Header="卡牌 / 药水结果筛选（已并入最终结果导向，暂不单独筛）" IsExpanded="False" Visibility="Collapsed" Margin="0,0,0,12">
+                                <Border Style="{StaticResource Card}" Margin="0">
+                                    <StackPanel>
+                                        <TextBlock Text="卡牌机会用于万花筒、新叶、卷轴类、变化/选牌等可能产生卡牌结果的路线。当前先提供常用 own/colorless/other 三类开关。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,0,0,8" />
+                                        <UniformGrid Columns="3">
+                                            <StackPanel>
+                                                <CheckBox x:Name="OwnCardsEnabledCheckBox" Content="本职业卡牌 own" Margin="4,0,4,4" />
+                                                <TextBox x:Name="OwnCardsAnyTextBox" AcceptsReturn="True" MinHeight="54" ToolTip="own whitelist_any" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <CheckBox x:Name="ColorlessCardsEnabledCheckBox" Content="无色卡 colorless" Margin="4,0,4,4" />
+                                                <TextBox x:Name="ColorlessCardsAnyTextBox" AcceptsReturn="True" MinHeight="54" ToolTip="colorless whitelist_any" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <CheckBox x:Name="OtherCardsEnabledCheckBox" Content="其它角色卡 other" Margin="4,0,4,4" />
+                                                <TextBox x:Name="OtherCardsAnyTextBox" AcceptsReturn="True" MinHeight="54" ToolTip="other whitelist_any" />
+                                            </StackPanel>
+                                        </UniformGrid>
+                                        <UniformGrid Columns="3" Margin="0,8,0,0">
+                                            <StackPanel>
+                                                <TextBlock Text="药水 whitelist_any" />
+                                                <TextBox x:Name="PotionAnyTextBox" AcceptsReturn="True" MinHeight="54" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="药水 whitelist_all" />
+                                                <TextBox x:Name="PotionAllTextBox" AcceptsReturn="True" MinHeight="54" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="药水 blacklist" />
+                                                <TextBox x:Name="PotionBlacklistTextBox" AcceptsReturn="True" MinHeight="54" />
+                                            </StackPanel>
+                                        </UniformGrid>
+                                    </StackPanel>
+                                </Border>
+                            </Expander>
+
+                            <Expander Header="事件队列筛选（Act1/2/3 前 N 个默认可出现事件）" IsExpanded="False" Margin="0,0,0,12">
+                                <Border Style="{StaticResource Card}" Margin="0">
+                                    <StackPanel>
+                                        <TextBlock Text="筛指定 Act 的前 N 个默认可出现事件是否包含目标事件；N 可在本区域设置，默认 10，最大 15。Act 只支持 1/2/3。通过下拉框选择作用 Act 和事件，再用按钮加入“必须包含”或“排除事件”Tag；不再保留手动事件输入框，也暂不显示“包含任一”选项。默认会排除当前 Act 必跳过、普通队列必跳过、起始偏移跳过的事件。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,0,0,8" />
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="120" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="事件筛选前 N（≤15）" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                            <TextBox Grid.Column="1" x:Name="SearchEventLimitTextBox" Text="10" ToolTip="批量筛种事件队列筛选范围。默认 10，上限 15；只影响事件筛选，不影响单种分析显示数量。" />
+                                            <TextBlock Grid.Column="2" Text="作用 Act" VerticalAlignment="Center" Margin="16,0,8,0" />
+                                            <ComboBox Grid.Column="3" x:Name="EventActScopeComboBox" SelectedIndex="0" ToolTip="选择事件筛选作用的 Act。任意 Act 表示不限定 Act；选择 Act1/Act2/Act3 时，后续添加的事件 Tag 会自动限定到对应 Act。">
+                                                <ComboBoxItem Content="任意 Act" Tag="any" IsSelected="True" />
+                                                <ComboBoxItem Content="Act1" Tag="1" />
+                                                <ComboBoxItem Content="Act2" Tag="2" />
+                                                <ComboBoxItem Content="Act3" Tag="3" />
+                                            </ComboBox>
+                                            <TextBlock Grid.Column="4" Text="只匹配默认可出现事件队列；完整原始队列仅用于单种分析查看。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="12,0,0,0" />
+                                        </Grid>
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                                <TextBlock Text="事件选择" />
+                                                <ComboBox x:Name="EventBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="可输入关键字搜索，但最终应选择下拉候选事件；选择后用右侧按钮加入事件队列筛选。" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                                <Button Content="加入必须包含" MinWidth="112" Click="AddEventAllTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                <Button Content="加入排除事件" MinWidth="112" Click="AddEventBlacklistTag_Click" Margin="0,0,6,0" />
+                                                <Button Content="清空事件 Tag" MinWidth="112" Click="ClearEventTags_Click" />
+                                            </StackPanel>
+                                        </Grid>
+                                        <TextBlock Text="已添加事件会显示在下方条件表中；每条条件保存添加时的 Act 与前 N 设置，可单独删除。当前只暴露“必须包含”和“排除事件”。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,2,0,8" />
+                                        <Border Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,0,0,8">
+                                            <StackPanel>
+                                                <DockPanel Margin="0,0,0,6">
+                                                    <TextBlock Text="事件筛选条件表" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                                    <TextBlock DockPanel.Dock="Right" Text="Act / 前N / 条件 / 事件" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" />
+                                                </DockPanel>
+                                                <ListBox x:Name="EventFilterConditionsListBox" BorderThickness="0" Background="Transparent" MaxHeight="180">
+                                                    <ListBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="White" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="6" Padding="6" Margin="0,3">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="68" />
+                                                                        <ColumnDefinition Width="64" />
+                                                                        <ColumnDefinition Width="92" />
+                                                                        <ColumnDefinition Width="*" />
+                                                                        <ColumnDefinition Width="Auto" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <TextBlock Grid.Column="0" Text="{Binding ActText}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                                                    <TextBlock Grid.Column="1" Text="{Binding LimitText}" VerticalAlignment="Center" />
+                                                                    <TextBlock Grid.Column="2" Text="{Binding ConditionText}" VerticalAlignment="Center" />
+                                                                    <TextBlock Grid.Column="3" Text="{Binding EventText}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                                                    <Button Grid.Column="4" Content="删除" Click="RemoveEventCondition_Click" Padding="8,2" Margin="8,0,0,0" />
+                                                                </Grid>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ListBox.ItemTemplate>
+                                                </ListBox>
+                                                <TextBlock x:Name="EventFilterConditionsEmptyText" Text="暂无事件筛选条件。" Foreground="{StaticResource MutedTextBrush}" Margin="2,4,0,0" />
+                                            </StackPanel>
+                                        </Border>
+                                        <Grid Visibility="Collapsed">
+                                            <TextBox x:Name="EventAnyTextBox" AcceptsReturn="True" />
+                                            <TextBox x:Name="EventAllTextBox" AcceptsReturn="True" />
+                                            <TextBox x:Name="EventBlacklistTextBox" AcceptsReturn="True" />
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </Expander>
+
+                            <Expander Header="商店专属遗物筛选" IsExpanded="False" Margin="0,0,0,12">
+                                <Border Style="{StaticResource Card}" Margin="0">
+                                    <StackPanel>
+                                        <CheckBox x:Name="ShopFilterEnabledCheckBox" Content="启用商店专属遗物筛选" Margin="4,0,4,8" />
+                                        <TextBlock Text="这里筛的是 Shop 稀有度的商店专属遗物序列：第 N 个商店专属遗物是什么，或前 N 个商店专属遗物里是否包含某个遗物。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="4,0,4,8" />
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="96" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                                <TextBlock Text="位置 / 前 N" />
+                                                <ComboBox x:Name="SearchShopLimitComboBox" Width="72" HorizontalAlignment="Left" ToolTip="用于“第 N 个是它”和“前 N 个包含”。">
+                                                    <ComboBoxItem Content="1" Tag="1" />
+                                                    <ComboBoxItem Content="2" Tag="2" />
+                                                    <ComboBoxItem Content="3" Tag="3" />
+                                                    <ComboBoxItem Content="4" Tag="4" />
+                                                    <ComboBoxItem Content="5" Tag="5" IsSelected="True" />
+                                                    <ComboBoxItem Content="6" Tag="6" />
+                                                    <ComboBoxItem Content="7" Tag="7" />
+                                                    <ComboBoxItem Content="8" Tag="8" />
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                                                <TextBlock Text="商店专属遗物" />
+                                                <ComboBox x:Name="ShopRelicBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                                <Button Content="第 N 个是它" MinWidth="112" Click="AddShopExactTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                <Button Content="前 N 个包含" MinWidth="112" Click="AddShopPrefixTag_Click" Margin="0,0,6,0" />
+                                                <Button Content="清空商店 Tag" MinWidth="126" Click="ClearShopTags_Click" />
+                                            </StackPanel>
+                                        </Grid>
+                                        <UniformGrid Columns="3" Visibility="Collapsed">
+                                            <StackPanel>
+                                                <TextBlock Text="第 N 个必须是" />
+                                                <TextBox x:Name="ShopExactTextBox" AcceptsReturn="True" MinHeight="54" ToolTip="格式：N:Relic，由按钮生成；也可手动写 3:MicroscopicTent。" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="前 N 个必须包含" />
+                                                <TextBox x:Name="ShopRequireTextBox" AcceptsReturn="True" MinHeight="54" ToolTip="格式：Relic &lt;= N，由按钮生成。" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="禁止出现" />
+                                                <TextBox x:Name="ShopBlacklistTextBox" AcceptsReturn="True" MinHeight="54" ToolTip="默认按检查前 N 个商店专属遗物判断。" />
+                                            </StackPanel>
+                                        </UniformGrid>
+                                    </StackPanel>
+                                </Border>
+                            </Expander>
+
+                            <Expander Header="先古之民筛选" IsExpanded="False" Margin="0,0,0,12">
+                                <Border Style="{StaticResource Card}" Margin="0">
+                                    <StackPanel>
+                                        <CheckBox x:Name="AncientSearchEnabledCheckBox" Content="启用先古筛选" Margin="4,0,4,8" />
+                                        <TextBlock Text="可以筛“是谁 / 不是谁”，也可以筛“需要某个定向选项 / 不想要某个定向选项”。下拉框已排除 Neow 选项，并优先显示中文名；状态预设用于告诉工具当前游戏状态，否则条件选项无法准确判断。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="4,0,4,8" />
+                                        <UniformGrid Columns="3" Margin="0,0,0,8">
+                                            <StackPanel Margin="0,0,8,0">
+                                                <TextBlock Text="先古之民" />
+                                                <ComboBox x:Name="AncientBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,8,0">
+                                                <Button Content="需要它" Click="AddAncientRequireTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                <Button Content="不要它" Click="AddAncientBlacklistTag_Click" Margin="0,0,6,0" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                                <Button Content="清空先古 Tag" Click="ClearAncientTags_Click" />
+                                            </StackPanel>
+                                        </UniformGrid>
+                                        <UniformGrid Columns="3" Margin="0,0,0,8">
+                                            <StackPanel Margin="0,0,8,0">
+                                                <TextBlock Text="定向选项" />
+                                                <ComboBox x:Name="AncientOptionBuilderComboBox" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="DisplayText" ToolTip="可选择或输入 Pael:Goopy / act3:Darv:Pandora 这类写法。" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,8,0">
+                                                <Button Content="需要选项" Click="AddAncientOptionRequireTag_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" Margin="0,0,6,0" />
+                                                <Button Content="不想要选项" Click="AddAncientOptionBlacklistTag_Click" />
+                                            </StackPanel>
+                                        </UniformGrid>
+                                        <UniformGrid Columns="2" Visibility="Collapsed">
+                                            <StackPanel>
+                                                <TextBlock Text="需要出现的先古" />
+                                                <TextBox x:Name="AncientRequireTextBox" AcceptsReturn="True" MinHeight="48" ToolTip="例如：Darv 或 act2:Pael" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="不要出现的先古" />
+                                                <TextBox x:Name="AncientBlacklistTextBox" AcceptsReturn="True" MinHeight="48" />
+                                            </StackPanel>
+                                        </UniformGrid>
+                                        <UniformGrid Columns="2" Margin="0,6,0,8" Visibility="Collapsed">
+                                            <StackPanel>
+                                                <TextBlock Text="需要出现的定向选项" />
+                                                <TextBox x:Name="AncientOptionRequireTextBox" AcceptsReturn="True" MinHeight="48" ToolTip="例如：Pael:Goopy 或 act3:Darv:Pandora" />
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="不想要的定向选项" />
+                                                <TextBox x:Name="AncientOptionBlacklistTextBox" AcceptsReturn="True" MinHeight="48" />
+                                            </StackPanel>
+                                        </UniformGrid>
+                                        <UniformGrid Columns="2" Margin="0,6,0,8">
+                                            <StackPanel Margin="0,0,8,0">
+                                                <TextBlock Text="Darv 出现位置" />
+                                                <ComboBox x:Name="AncientDarvActComboBox" SelectionChanged="AncientDarvActComboBox_SelectionChanged" ToolTip="不限制=只筛 Darv；Act2/Act3=要求 Darv 出现在对应先古位置。">
+                                                    <ComboBoxItem Content="不限制" Tag="any" IsSelected="True" />
+                                                    <ComboBoxItem Content="Act2 / 第二层" Tag="act2" />
+                                                    <ComboBoxItem Content="Act3 / 第三层" Tag="act3" />
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <TextBlock Text="选择 Act2/Act3 会在右侧 Tag 中显示为 act2:Darv / act3:Darv。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="10,18,0,0" />
+                                        </UniformGrid>
+                                        <TextBlock Text="当前游戏状态预设" FontWeight="SemiBold" Margin="4,4,4,4" />
+                                        <UniformGrid Columns="2">
+                                            <CheckBox x:Name="AncientPaelGoopyCheckBox" Content="Pael: Gooopy 可附魔防御牌 ≥ 3" IsChecked="True" />
+                                            <CheckBox x:Name="AncientPaelRemovableCheckBox" Content="Pael: 可移除牌 ≥ 5" IsChecked="True" />
+                                            <CheckBox x:Name="AncientPaelHasEventPetCheckBox" Content="Pael: 已有事件宠物" />
+                                            <CheckBox x:Name="AncientOrobasTouchCheckBox" Content="Orobas: TouchOfOrobas 条件满足" IsChecked="True" />
+                                            <CheckBox x:Name="AncientOrobasToothCheckBox" Content="Orobas: ArchaicTooth 条件满足" IsChecked="True" />
+                                            <CheckBox x:Name="AncientTezcataraBasicStrikeCheckBox" Content="Tezcatara: 还有 Basic Strike" IsChecked="True" />
+                                            <CheckBox x:Name="AncientNonupeipeSwiftCheckBox" Content="Nonupeipe: Swift 可附魔牌 ≥ 4" IsChecked="True" />
+                                            <CheckBox x:Name="AncientTanxInstinctCheckBox" Content="Tanx: Instinct 可附魔牌 ≥ 3" IsChecked="True" />
+                                            <CheckBox x:Name="AncientDarvPandoraCheckBox" Content="Darv: 允许潘多拉魔盒出现" IsChecked="True" />
+                                        </UniformGrid>
+                                    </StackPanel>
+                                </Border>
+                            </Expander>
+
+                                </StackPanel>
+                                <Border Grid.Column="1" Style="{StaticResource Card}" Margin="0">
+                                    <DockPanel>
+                                        <StackPanel DockPanel.Dock="Top">
+                                            <TextBlock Text="当前 tag 要求" FontSize="18" FontWeight="SemiBold" />
+                                            <TextBlock Text="这里汇总你在左侧添加的筛种要求。事件队列筛选匹配 Act1/2/3 的前 N 个默认可出现事件，N 最大 15，可在事件筛选区域选择作用 Act。" TextWrapping="Wrap" Foreground="{StaticResource MutedTextBrush}" Margin="0,6,0,10" />
+                                            <TextBlock x:Name="SearchTagCountText" Text="0 个 tag" Foreground="#1D4ED8" FontWeight="SemiBold" Margin="0,0,0,8" />
+                                            <Button Content="刷新 tag 汇总" Click="RefreshSearchTags_Click" HorizontalAlignment="Left" />
+                                        </StackPanel>
+                                        <ListBox x:Name="SearchRequirementTagsListBox" BorderThickness="0" Margin="0,10,0,0">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Background="#EFF6FF" BorderBrush="#BFDBFE" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,4">
+                                                        <DockPanel>
+                                                            <Button DockPanel.Dock="Right" Content="×" Width="24" Height="24" Padding="0" Margin="8,0,0,0"
+                                                                    Click="DeleteSearchTag_Click"
+                                                                    IsEnabled="{Binding CanRemove}"
+                                                                    ToolTip="删除这个 Tag" />
+                                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Foreground="#1E3A8A" VerticalAlignment="Center" />
+                                                        </DockPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+                                <Button x:Name="SearchButton" Content="开始筛种" Click="RunSearch_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" />
+                                <Button x:Name="StopSearchButton" Content="停止" Click="StopSearch_Click" IsEnabled="False" Background="#DC2626" Foreground="White" />
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <Border Grid.Row="1" Style="{StaticResource Card}" Padding="12" Margin="0,12,0,0">
+                        <DockPanel LastChildFill="True">
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="打开筛种结果" Click="NavSearchResults_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="筛种进度" FontWeight="SemiBold" Margin="0,0,10,0" />
+                                <TextBlock x:Name="SearchSummaryText" Text="就绪" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="SearchResultsPage" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource Card}" Padding="12" Margin="0,0,0,12">
+                        <DockPanel LastChildFill="True">
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBox x:Name="CandidatePoolNameTextBox" Width="180" Text="粗筛候选池" ToolTip="保存当前筛种命中为候选池时使用的名称。" />
+                                <Button Content="保存为粗筛库" Click="SaveCurrentHitsToCandidatePool_Click" />
+                                <Button Content="打开粗筛库" Click="NavCandidate_Click" />
+                                <Button Content="填到单种分析" Click="SendSelectedSeedToAnalyze_Click" />
+                                <Button Content="收藏选中" Click="SaveSelectedSearchHitToHistory_Click" />
+                                <Button Content="复制选中详情" Click="CopySearch_Click" />
+                                <Button Content="复制全部命中" Click="CopyAllSearchHits_Click" />
+                                <Button Content="复制选中 Seed" Click="CopySelectedSeed_Click" />
+                                <Button Content="清空" Click="ClearSearch_Click" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="选中 Seed" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                <TextBox x:Name="SearchSelectedSeedBox" Width="220" IsReadOnly="True" FontFamily="Consolas, Microsoft YaHei UI" ToolTip="左侧选中命中结果后，这里会显示可复制的 seed" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,12,0">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text="命中种子列表" FontWeight="SemiBold" Margin="4,0,4,8" />
+                                <ListBox x:Name="SearchHitsListBox" SelectionChanged="SearchHitsListBox_SelectionChanged">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Padding="8" Margin="0,3" BorderBrush="#E5E7EB" BorderThickness="0,0,0,1">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontFamily="Consolas, Microsoft YaHei UI" />
+                                                    <TextBlock Text="{Binding CategoryText}" Foreground="#2563EB" FontSize="12" TextWrapping="Wrap" Margin="0,2,0,0" />
+                                                    <TextBlock Text="{Binding Summary}" Foreground="#6B7280" FontSize="12" TextWrapping="Wrap" Margin="0,2,0,0" MaxHeight="58" />
+                                                    <TextBlock Text="{Binding Meta}" Foreground="#9CA3AF" FontSize="11" Margin="0,2,0,0" />
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DockPanel>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource Card}">
+                            <DockPanel>
+                                <Expander DockPanel.Dock="Top" Header="原始详情（点击展开 / 折叠）" IsExpanded="False" Margin="0,0,0,8">
+                                    <Border Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,6,0,0">
+                                        <TextBox x:Name="SearchOutputBox" FontFamily="Consolas, Microsoft YaHei UI" FontSize="13" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" IsReadOnly="True" MinHeight="180" MaxHeight="320" />
+                                    </Border>
+                                </Expander>
+                                <ListBox x:Name="SearchDetailCardsListBox" BorderThickness="0" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" HorizontalContentAlignment="Stretch">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            <Setter Property="Padding" Value="0" />
+                                            <Setter Property="Margin" Value="0" />
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#F8FAFC" BorderBrush="#DDE6F3" BorderThickness="1" CornerRadius="10" Padding="12" Margin="4,5" HorizontalAlignment="Stretch">
+                                                <StackPanel>
+                                                    <DockPanel>
+                                                        <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="15" Foreground="#111827" />
+                                                        <Border DockPanel.Dock="Right" Background="#ECFDF5" CornerRadius="8" Padding="8,2" Margin="8,0,0,0">
+                                                            <TextBlock Text="{Binding Badge}" Foreground="#047857" FontSize="12" />
+                                                        </Border>
+                                                    </DockPanel>
+                                                    <ItemsControl ItemsSource="{Binding Lines}" Margin="0,8,0,0">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Foreground="{Binding ForegroundBrush}" FontWeight="{Binding FontWeight}" Margin="0,2" ToolTip="{Binding ToolTip}" />
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="HistoryPage" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource Card}" Padding="12" Margin="0,0,0,12">
+                        <DockPanel LastChildFill="True">
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="刷新" Click="RefreshHistory_Click" />
+                                <Button Content="打开目录" Click="OpenHistoryFolder_Click" />
+                                <Button Content="复制 Seed" Click="CopyHistorySeed_Click" />
+                                <Button Content="复制详情" Click="CopyHistoryDetail_Click" />
+                                <Button Content="复制可见 Seeds" Click="CopyVisibleHistorySeeds_Click" />
+                                <Button Content="导出可见" Click="ExportVisibleHistory_Click" />
+                                <Button Content="填到单种分析" Click="FillHistoryToAnalyze_Click" />
+                                <Button Content="重新分析" Click="ReanalyzeHistory_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="搜索" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                <TextBox x:Name="HistoryQueryTextBox" Width="260" TextChanged="HistoryQueryTextBox_TextChanged" ToolTip="按 seed、中文/英文角色、标签、备注、命中摘要、RNG 版本搜索收藏库。" />
+                                <TextBlock x:Name="HistoryStatusText" Text="收藏库未加载" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" Margin="12,0,0,0" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="520" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,12,0">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text="收藏 / 搜索历史" FontWeight="SemiBold" Margin="4,0,4,8" />
+                                <DataGrid x:Name="HistoryDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="HistoryDataGrid_SelectionChanged" CanUserAddRows="False" HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="收藏" Binding="{Binding FavoriteLabel}" Width="52" />
+                                        <DataGridTextColumn Header="Seed" Binding="{Binding Seed}" Width="118" />
+                                        <DataGridTextColumn Header="角色" Binding="{Binding Character}" Width="118" />
+                                        <DataGridTextColumn Header="A" Binding="{Binding AscensionText}" Width="42" />
+                                        <DataGridTextColumn Header="标签" Binding="{Binding TagsText}" Width="120" />
+                                        <DataGridTextColumn Header="摘要" Binding="{Binding Summary}" Width="*" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource Card}">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                                    <TextBlock Text="选中记录" FontSize="18" FontWeight="SemiBold" />
+                                    <TextBlock Text="收藏库 v2 保存爽种、筛种命中与单种分析记录；记录会携带 rng_version / RollTheSpire2 版本，避免旧 RNG 与 v0.107+ 结果混淆。粗筛候选库已启用，可从筛种结果保存候选池并继续精筛。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,4,0,8" />
+                                    <UniformGrid Columns="2">
+                                        <StackPanel Margin="0,0,8,0">
+                                            <TextBlock Text="Seed" />
+                                            <TextBox x:Name="HistorySeedBox" IsReadOnly="True" FontFamily="Consolas, Microsoft YaHei UI" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock Text="来源 / 时间" />
+                                            <TextBox x:Name="HistoryMetaBox" IsReadOnly="True" />
+                                        </StackPanel>
+                                    </UniformGrid>
+                                    <StackPanel Margin="0,8,0,0">
+                                        <TextBlock Text="收藏" />
+                                        <CheckBox x:Name="HistoryFavoriteCheckBox" Content="收藏为爽种" />
+                                        <ComboBox x:Name="HistoryRatingComboBox" SelectedValuePath="Tag" Visibility="Collapsed">
+                                            <ComboBoxItem Content="0" Tag="0" IsSelected="True" />
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <TextBlock Text="标签（逗号分隔，可编辑）" Margin="0,8,0,0" />
+                                    <TextBox x:Name="HistoryTagsBox" />
+                                    <TextBlock Text="备注（可编辑）" Margin="0,8,0,0" />
+                                    <TextBox x:Name="HistoryNoteBox" AcceptsReturn="True" MinHeight="60" TextWrapping="Wrap" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                                        <Button Content="保存收藏/标签/备注" Click="SaveHistoryNote_Click" />
+                                        <Button Content="删除记录" Click="DeleteHistoryRecord_Click" Background="#FF6B6B" Foreground="White" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <TextBox x:Name="HistoryDetailBox" FontFamily="Consolas, Microsoft YaHei UI" FontSize="13" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+
+                <Grid x:Name="CandidatePage" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource Card}" Padding="12" Margin="0,0,0,12">
+                        <DockPanel LastChildFill="True">
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="刷新" Click="RefreshCandidatePools_Click" />
+                                <Button Content="继续筛这个池" Click="UseCandidatePoolForSearch_Click" Background="{StaticResource PrimaryBrush}" Foreground="White" />
+                                <Button Content="复制 Seeds" Click="CopyCandidatePoolSeeds_Click" />
+                                <Button Content="导出 Seeds" Click="ExportCandidatePoolSeeds_Click" />
+                                <Button Content="删除候选池" Click="DeleteCandidatePool_Click" Background="#FF6B6B" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="搜索" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                <TextBox x:Name="CandidateQueryTextBox" Width="260" TextChanged="CandidateQueryTextBox_TextChanged" ToolTip="按候选池名称、角色、备注、标签或 seed 搜索。" />
+                                <TextBlock x:Name="CandidateStatusText" Text="粗筛库未加载" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" Margin="12,0,0,0" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="520" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,12,0">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text="粗筛候选池" FontWeight="SemiBold" Margin="4,0,4,8" />
+                                <DataGrid x:Name="CandidatePoolsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="CandidatePoolsDataGrid_SelectionChanged" CanUserAddRows="False" HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="名称" Binding="{Binding Name}" Width="150" />
+                                        <DataGridTextColumn Header="角色" Binding="{Binding Character}" Width="118" />
+                                        <DataGridTextColumn Header="A" Binding="{Binding AscensionText}" Width="42" />
+                                        <DataGridTextColumn Header="Seeds" Binding="{Binding SeedCount}" Width="62" />
+                                        <DataGridTextColumn Header="更新时间" Binding="{Binding UpdatedAtText}" Width="132" />
+                                        <DataGridTextColumn Header="摘要" Binding="{Binding Summary}" Width="*" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
+                        </Border>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Style="{StaticResource Card}" Margin="0,0,0,12">
+                                <StackPanel>
+                                    <TextBlock Text="选中候选池" FontSize="18" FontWeight="SemiBold" />
+                                    <TextBlock Text="粗筛库只保存 seed 与极简摘要；继续筛时会重新调用 RollCore 精筛，不会把完整 raw detail 堆进内存。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,4,0,8" />
+                                    <TextBox x:Name="CandidatePoolMetaBox" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="96" />
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Row="1" Style="{StaticResource Card}">
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Top" Text="候选 Seeds（最多预览 5000 条）" FontWeight="SemiBold" Margin="4,0,4,8" />
+                                    <DataGrid x:Name="CandidateSeedsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="#" Binding="{Binding Index}" Width="50" />
+                                            <DataGridTextColumn Header="Seed" Binding="{Binding Seed}" Width="140" />
+                                            <DataGridTextColumn Header="摘要" Binding="{Binding Summary}" Width="*" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="EventsPage" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,14,0">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top">
+                                <TextBlock Text="事件检索" FontSize="18" FontWeight="SemiBold" />
+                                <TextBox x:Name="EventSearchTextBox" TextChanged="EventSearchTextBox_TextChanged" ToolTip="搜索中文名、ID、条件文本、选项文本" />
+                                <TextBlock Text="区域筛选" Foreground="{StaticResource MutedTextBrush}" Margin="4,4,0,2" />
+                                <WrapPanel Margin="0,0,0,4">
+                                    <CheckBox x:Name="FilterOvergrowthCheckBox" Content="密林" IsChecked="True" Checked="EventFilterChanged" Unchecked="EventFilterChanged" Margin="4,2" />
+                                    <CheckBox x:Name="FilterUnderdocksCheckBox" Content="暗港" IsChecked="True" Checked="EventFilterChanged" Unchecked="EventFilterChanged" Margin="4,2" />
+                                    <CheckBox x:Name="FilterHiveCheckBox" Content="巢穴" IsChecked="True" Checked="EventFilterChanged" Unchecked="EventFilterChanged" Margin="4,2" />
+                                    <CheckBox x:Name="FilterGloryCheckBox" Content="荣耀" IsChecked="True" Checked="EventFilterChanged" Unchecked="EventFilterChanged" Margin="4,2" />
+                                    <CheckBox x:Name="FilterSharedCheckBox" Content="共享" IsChecked="True" Checked="EventFilterChanged" Unchecked="EventFilterChanged" Margin="4,2" />
+                                </WrapPanel>
+                                <TextBlock Text="条件筛选" Foreground="{StaticResource MutedTextBrush}" Margin="4,4,0,2" />
+                                <WrapPanel Margin="0,0,0,8">
+                                    <CheckBox x:Name="FilterConditionalCheckBox" Content="有条件" IsChecked="True" Checked="EventFilterChanged" Unchecked="EventFilterChanged" Margin="4,2" />
+                                    <CheckBox x:Name="FilterNoConditionCheckBox" Content="无条件" IsChecked="True" Checked="EventFilterChanged" Unchecked="EventFilterChanged" Margin="4,2" />
+                                </WrapPanel>
+                                <TextBlock x:Name="EventRuleSummaryText" Foreground="{StaticResource MutedTextBrush}" Margin="4,2,0,8" />
+                            </StackPanel>
+                            <ListBox x:Name="EventListBox" SelectionChanged="EventListBox_SelectionChanged" />
+                        </DockPanel>
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource Card}">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="刷新事件百科" Click="LoadEvents_Click" />
+                                <Button Content="复制详情" Click="CopyEventDetail_Click" />
+                            </StackPanel>
+                            <TextBox x:Name="EventDetailBox" FontFamily="Consolas, Microsoft YaHei UI" FontSize="13" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+                        </DockPanel>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="LogPage" Visibility="Collapsed">
+                    <Border Style="{StaticResource Card}">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="复制日志" Click="CopyLog_Click" />
+                                <Button Content="清空日志" Click="ClearLog_Click" />
+                            </StackPanel>
+                            <TextBox x:Name="LogBox" FontFamily="Consolas, Microsoft YaHei UI" FontSize="13" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+                        </DockPanel>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="StatusPage" Visibility="Collapsed">
+                    <Border Style="{StaticResource Card}">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                                <TextBlock Text="数据状态" FontSize="20" FontWeight="SemiBold" />
+                                <TextBlock Text="汇总当前数据文件、解锁档案、事件规则、实体索引与运行配置。用于确认程序实际加载的内容。" Foreground="{StaticResource MutedTextBrush}" TextWrapping="Wrap" Margin="0,4,0,8" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="刷新数据状态" Width="140" HorizontalAlignment="Left" Click="RefreshStatus_Click" />
+                                    <Button Content="复制数据状态" Width="140" HorizontalAlignment="Left" Click="CopyStatus_Click" Margin="8,0,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBox x:Name="StatusBox" FontFamily="Consolas, Microsoft YaHei UI" FontSize="13" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Border Grid.Row="2" Background="#E5E7EB" CornerRadius="8" Padding="10" Margin="0,12,0,0">
+                <DockPanel>
+                    <TextBlock x:Name="BottomStatusText" Text="就绪" Foreground="#374151" />
+                    <TextBlock DockPanel.Dock="Right" Text="RollTheSpire2 v2.1.0 · stable" Foreground="#6B7280" />
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

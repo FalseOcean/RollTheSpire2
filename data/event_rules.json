@@ -1,0 +1,2552 @@
+{
+  "schema": 1,
+  "source": "sts2 decompiled source",
+  "generated_for": "Roll v17.7/v17.8 event queue prediction",
+  "event_allowed_rules": {
+    "AMALGAMATOR": {
+      "event_id": "AMALGAMATOR",
+      "class_name": "Amalgamator",
+      "aliases": [
+        "AMALGAMATOR",
+        "Amalgamator"
+      ],
+      "display_name": {
+        "zhs": "熔合者",
+        "eng": "Amalgamator",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "AMALGAMATOR.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 33,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "AMALGAMATOR.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 28,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "AMALGAMATOR.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 32,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "AMALGAMATOR.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 27,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\Amalgamator.cs",
+      "source_line": 27,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家牌组中都必须至少有 2 张可移除的基础 Strike 牌，以及 2 张可移除的基础 Defend 牌。",
+      "allowed_summary_en": "Every player must have at least two removable Basic Strike-tagged cards and two removable Basic Defend-tagged cards.",
+      "conditions": [
+        {
+          "type": "cards",
+          "operator": ">=",
+          "value": "2 removable Basic cards with CardTag.Strike",
+          "description_zh": "每名玩家至少有 2 张可移除的基础 Strike 牌。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "cards",
+          "operator": ">=",
+          "value": "2 removable Basic cards with CardTag.Defend",
+          "description_zh": "每名玩家至少有 2 张可移除的基础 Defend 牌。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain",
+      "helper_locations": [
+        {
+          "method": "IsValid(CardTag tag, CardModel card)",
+          "source_line": 69
+        }
+      ]
+    },
+    "BRAIN_LEECH": {
+      "event_id": "BRAIN_LEECH",
+      "class_name": "BrainLeech",
+      "aliases": [
+        "BRAIN_LEECH",
+        "BrainLeech"
+      ],
+      "display_name": {
+        "zhs": "脑蛭",
+        "eng": "Brain Leech",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "BRAIN_LEECH.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 62,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "BRAIN_LEECH.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 54,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "BRAIN_LEECH.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 61,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "BRAIN_LEECH.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 53,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\BrainLeech.cs",
+      "source_line": 37,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act1 或 Act2 可出现（源码 CurrentActIndex < 2）。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex < 2.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": "<",
+          "value": 2,
+          "description_zh": "当前 Act 索引小于 2，也就是 Act1 或 Act2。"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "BYRDONIS_NEST": {
+      "event_id": "BYRDONIS_NEST",
+      "class_name": "ByrdonisNest",
+      "aliases": [
+        "BYRDONIS_NEST",
+        "ByrdonisNest"
+      ],
+      "display_name": {
+        "zhs": null,
+        "eng": null,
+        "source": [
+          {
+            "lang": "eng",
+            "key": "BYRDONIS_NEST.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 79,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "BYRDONIS_NEST.name",
+            "file": "localization.zip",
+            "member": "localization/eng/monsters.json",
+            "line": 53,
+            "table": "monsters",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "BYRDONIS_NEST.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 73,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "BYRDONIS_NEST.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 78,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "BYRDONIS_NEST.name",
+            "file": "localization.zip",
+            "member": "localization/zhs/monsters.json",
+            "line": 53,
+            "table": "monsters",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "BYRDONIS_NEST.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 72,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\ByrdonisNest.cs",
+      "source_line": 34,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家都不能已有事件宠物。事件宠物指：拥有 AddsPet 遗物，或牌组中包含 ByrdonisEgg。",
+      "allowed_summary_en": "Every player must not already have an event pet. An event pet means either a relic with AddsPet, or ByrdonisEgg in the deck.",
+      "conditions": [
+        {
+          "type": "relic",
+          "operator": "not_exists",
+          "value": "RelicModel.AddsPet == true",
+          "description_zh": "每名玩家都不能拥有 AddsPet 遗物。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "deck",
+          "operator": "not_contains",
+          "value": "ByrdonisEgg",
+          "description_zh": "每名玩家牌组中都不能有 ByrdonisEgg。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "COLORFUL_PHILOSOPHERS": {
+      "event_id": "COLORFUL_PHILOSOPHERS",
+      "class_name": "ColorfulPhilosophers",
+      "aliases": [
+        "COLORFUL_PHILOSOPHERS",
+        "ColorfulPhilosophers"
+      ],
+      "display_name": {
+        "zhs": "色彩哲学家",
+        "eng": "Colorful Philosophers",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "COLORFUL_PHILOSOPHERS.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 94,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "COLORFUL_PHILOSOPHERS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 81,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "COLORFUL_PHILOSOPHERS.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 93,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "COLORFUL_PHILOSOPHERS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 80,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\ColorfulPhilosophers.cs",
+      "source_line": 29,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家已解锁的角色卡池数量必须大于 1。",
+      "allowed_summary_en": "Every player must have more than one unlocked character card pool.",
+      "conditions": [
+        {
+          "type": "unlock",
+          "operator": ">",
+          "value": "UnlockState.CharacterCardPools.Count() > 1",
+          "description_zh": "每名玩家解锁的角色卡池数量大于 1。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "COLOSSAL_FLOWER": {
+      "event_id": "COLOSSAL_FLOWER",
+      "class_name": "ColossalFlower",
+      "aliases": [
+        "COLOSSAL_FLOWER",
+        "ColossalFlower"
+      ],
+      "display_name": {
+        "zhs": "巨大花卉",
+        "eng": "Colossal Flower",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "COLOSSAL_FLOWER.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 114,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "COLOSSAL_FLOWER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 98,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "COLOSSAL_FLOWER.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 113,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "COLOSSAL_FLOWER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 97,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\ColossalFlower.cs",
+      "source_line": 46,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家当前生命至少为 19。",
+      "allowed_summary_en": "Every player must have at least 19 current HP.",
+      "conditions": [
+        {
+          "type": "hp",
+          "operator": ">=",
+          "value": 19,
+          "description_zh": "每名玩家当前生命至少 19。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "CRYSTAL_SPHERE": {
+      "event_id": "CRYSTAL_SPHERE",
+      "class_name": "CrystalSphere",
+      "aliases": [
+        "CRYSTAL_SPHERE",
+        "CrystalSphere"
+      ],
+      "display_name": {
+        "zhs": "水晶球",
+        "eng": "Crystal Sphere",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "CRYSTAL_SPHERE.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 141,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "CRYSTAL_SPHERE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 134,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "CRYSTAL_SPHERE.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 140,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "CRYSTAL_SPHERE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 133,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\CrystalSphere.cs",
+      "source_line": 49,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act2 及以后可出现（源码 CurrentActIndex > 0），且每名玩家金币至少 100。",
+      "allowed_summary_en": "Allowed after Act 1, and every player must have at least 100 gold.",
+      "conditions": [
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 100,
+          "description_zh": "每名玩家金币至少 100。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "act",
+          "operator": ">",
+          "value": 0,
+          "description_zh": "当前 Act 索引大于 0，也就是 Act2 及以后。"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "DENSE_VEGETATION": {
+      "event_id": "DENSE_VEGETATION",
+      "class_name": "DenseVegetation",
+      "aliases": [
+        "DENSE_VEGETATION",
+        "DenseVegetation"
+      ],
+      "display_name": {
+        "zhs": "茂密的植被",
+        "eng": "Dense Vegetation",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "DENSE_VEGETATION.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 152,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "DENSE_VEGETATION.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 143,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "DENSE_VEGETATION.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 150,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "DENSE_VEGETATION.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 142,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\DenseVegetation.cs",
+      "source_line": 41,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "单人模式总是允许；多人模式下，每名玩家当前生命必须大于 8。",
+      "allowed_summary_en": "Always allowed in single-player; in multiplayer, every player must have current HP greater than 8.",
+      "conditions": [
+        {
+          "type": "player_count",
+          "operator": "custom",
+          "value": "Players.Count == 1 OR all players CurrentHp > 8",
+          "description_zh": "单人直接允许；多人时每名玩家当前生命必须大于 8。",
+          "applies_to": "run"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "DOLL_ROOM": {
+      "event_id": "DOLL_ROOM",
+      "class_name": "DollRoom",
+      "aliases": [
+        "DOLL_ROOM",
+        "DollRoom"
+      ],
+      "display_name": {
+        "zhs": "玩偶室",
+        "eng": "Doll Room",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "DOLL_ROOM.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 169,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "DOLL_ROOM.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 159,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "DOLL_ROOM.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 167,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "DOLL_ROOM.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 157,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\DollRoom.cs",
+      "source_line": 79,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "仅 Act2 可出现（源码 CurrentActIndex == 1）。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex == 1.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": "==",
+          "value": 1,
+          "description_zh": "当前 Act 索引等于 1，也就是 Act2。"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "ENDLESS_CONVEYOR": {
+      "event_id": "ENDLESS_CONVEYOR",
+      "class_name": "EndlessConveyor",
+      "aliases": [
+        "ENDLESS_CONVEYOR",
+        "EndlessConveyor"
+      ],
+      "display_name": {
+        "zhs": "无尽传送带",
+        "eng": "Endless Conveyor",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "ENDLESS_CONVEYOR.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 221,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "ENDLESS_CONVEYOR.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 216,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "ENDLESS_CONVEYOR.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 218,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "ENDLESS_CONVEYOR.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 213,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\EndlessConveyor.cs",
+      "source_line": 94,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家金币至少 120。",
+      "allowed_summary_en": "Every player must have at least 120 gold.",
+      "conditions": [
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 120,
+          "description_zh": "每名玩家金币至少 120。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "FAKE_MERCHANT": {
+      "event_id": "FAKE_MERCHANT",
+      "class_name": "FakeMerchant",
+      "aliases": [
+        "FAKE_MERCHANT",
+        "FakeMerchant"
+      ],
+      "display_name": {
+        "zhs": "商人？？？",
+        "eng": "The Merchant???",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "FAKE_MERCHANT.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 260,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "FAKE_MERCHANT.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 225,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "FAKE_MERCHANT.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 257,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "FAKE_MERCHANT.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 222,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\FakeMerchant.cs",
+      "source_line": 97,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act2 及以后可出现（源码 CurrentActIndex >= 1），仅限单人；玩家金币至少 100，或拥有 FoulPotion。",
+      "allowed_summary_en": "Allowed from Act 2 onward (CurrentActIndex >= 1), single-player only, and the player must have at least 100 gold or a FoulPotion.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": ">=",
+          "value": 1,
+          "description_zh": "当前 Act 索引至少为 1，也就是 Act2 及以后。"
+        },
+        {
+          "type": "player_count",
+          "operator": "==",
+          "value": 1,
+          "description_zh": "必须是单人游戏。"
+        },
+        {
+          "type": "other",
+          "operator": "custom",
+          "value": "player.Gold >= 100 OR player.Potions.Any(potion is FoulPotion)",
+          "description_zh": "玩家金币至少 100，或药水栏中有 FoulPotion。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "FIELD_OF_MAN_SIZED_HOLES": {
+      "event_id": "FIELD_OF_MAN_SIZED_HOLES",
+      "class_name": "FieldOfManSizedHoles",
+      "aliases": [
+        "FIELD_OF_MAN_SIZED_HOLES",
+        "FieldOfManSizedHoles"
+      ],
+      "display_name": {
+        "zhs": "人形洞穴之地",
+        "eng": "Field of Man-Sized Holes",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "FIELD_OF_MAN_SIZED_HOLES.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 268,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "FIELD_OF_MAN_SIZED_HOLES.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 262,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "FIELD_OF_MAN_SIZED_HOLES.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 265,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "FIELD_OF_MAN_SIZED_HOLES.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 259,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\FieldOfManSizedHoles.cs",
+      "source_line": 30,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家牌组中都必须有至少 1 张可被 PerfectFit 附魔的牌。",
+      "allowed_summary_en": "Every player must have at least one deck card that PerfectFit can enchant.",
+      "conditions": [
+        {
+          "type": "deck",
+          "operator": "exists",
+          "value": "PerfectFit.CanEnchant(card)",
+          "description_zh": "每名玩家牌组中至少有 1 张可被 PerfectFit 附魔的牌：不是 Status、Curse 或 Quest，不是牌组中的 Unplayable 牌，并且没有已有不兼容附魔。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "GRAVE_OF_THE_FORGOTTEN": {
+      "event_id": "GRAVE_OF_THE_FORGOTTEN",
+      "class_name": "GraveOfTheForgotten",
+      "aliases": [
+        "GRAVE_OF_THE_FORGOTTEN",
+        "GraveOfTheForgotten"
+      ],
+      "display_name": {
+        "zhs": "遗忘之墓",
+        "eng": "Grave of the Forgotten",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "GRAVE_OF_THE_FORGOTTEN.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 280,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "GRAVE_OF_THE_FORGOTTEN.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 273,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "GRAVE_OF_THE_FORGOTTEN.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 277,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "GRAVE_OF_THE_FORGOTTEN.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 270,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\GraveOfTheForgotten.cs",
+      "source_line": 36,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家牌组中都必须有至少 1 张可被 SoulsPower 附魔的牌；该牌还必须带有本地 Exhaust 关键词。",
+      "allowed_summary_en": "Every player must have at least one deck card that SoulsPower can enchant; the card must also have a local Exhaust keyword.",
+      "conditions": [
+        {
+          "type": "deck",
+          "operator": "exists",
+          "value": "SoulsPower.CanEnchant(card)",
+          "description_zh": "每名玩家牌组中至少有 1 张满足基础附魔规则，并且本地关键词包含 Exhaust 的牌。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain",
+      "helper_locations": [
+        {
+          "method": "HasEnchantableCards(Player player)",
+          "source_line": 73
+        }
+      ]
+    },
+    "LUMINOUS_CHOIR": {
+      "event_id": "LUMINOUS_CHOIR",
+      "class_name": "LuminousChoir",
+      "aliases": [
+        "LUMINOUS_CHOIR",
+        "LuminousChoir"
+      ],
+      "display_name": {
+        "zhs": "冷光合唱团",
+        "eng": "Luminous Choir",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "LUMINOUS_CHOIR.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 325,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "LUMINOUS_CHOIR.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 316,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "LUMINOUS_CHOIR.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 322,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "LUMINOUS_CHOIR.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 313,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\LuminousChoir.cs",
+      "source_line": 23,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家金币至少 149，并且遗物抓取池中存在至少 1 个当前允许获得的遗物。注意：出现检查发生在 CalculateVars 之前。",
+      "allowed_summary_en": "Every player must have at least 149 gold and at least one currently allowed relic available in their relic grab bag. The appearance check happens before CalculateVars.",
+      "conditions": [
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 149,
+          "description_zh": "每名玩家金币至少 149。这是出现条件；事件开始后的 CalculateVars 才会把价格随机降低。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "relic_pool",
+          "operator": "exists",
+          "value": "available relic where RelicModel.IsAllowed(runState)",
+          "description_zh": "每名玩家遗物抓取池中至少有 1 个通过 RelicModel.IsAllowed(runState) 的可用遗物。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "MORPHIC_GROVE": {
+      "event_id": "MORPHIC_GROVE",
+      "class_name": "MorphicGrove",
+      "aliases": [
+        "MORPHIC_GROVE",
+        "MorphicGrove"
+      ],
+      "display_name": {
+        "zhs": "变形灵林谷",
+        "eng": "Morphic Grove",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "MORPHIC_GROVE.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 337,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "MORPHIC_GROVE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 331,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "MORPHIC_GROVE.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 334,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "MORPHIC_GROVE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 328,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\MorphicGrove.cs",
+      "source_line": 24,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家金币至少 100，且牌组中至少有 2 张可变化的牌。",
+      "allowed_summary_en": "Every player must have at least 100 gold and at least two transformable deck cards.",
+      "conditions": [
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 100,
+          "description_zh": "每名玩家金币至少 100。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "cards",
+          "operator": ">=",
+          "value": "2 cards where IsTransformable",
+          "description_zh": "每名玩家牌组中至少有 2 张可变化的牌。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "POTION_COURIER": {
+      "event_id": "POTION_COURIER",
+      "class_name": "PotionCourier",
+      "aliases": [
+        "POTION_COURIER",
+        "PotionCourier"
+      ],
+      "display_name": {
+        "zhs": "药水快递员",
+        "eng": "Potion Courier",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "POTION_COURIER.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 345,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "POTION_COURIER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 339,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "POTION_COURIER.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 342,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "POTION_COURIER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 336,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\PotionCourier.cs",
+      "source_line": 31,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act2 及以后可出现（源码 CurrentActIndex > 0）。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex > 0.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": ">",
+          "value": 0,
+          "description_zh": "当前 Act 索引大于 0，也就是 Act2 及以后。"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "PUNCH_OFF": {
+      "event_id": "PUNCH_OFF",
+      "class_name": "PunchOff",
+      "aliases": [
+        "PUNCH_OFF",
+        "PunchOff"
+      ],
+      "display_name": {
+        "zhs": "重拳出击",
+        "eng": "Punch Off",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "PUNCH_OFF.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 358,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "PUNCH_OFF.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 349,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "PUNCH_OFF.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 353,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "PUNCH_OFF.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 345,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\PunchOff.cs",
+      "source_line": 38,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "总楼层至少为 6。",
+      "allowed_summary_en": "TotalFloor must be at least 6.",
+      "conditions": [
+        {
+          "type": "floor",
+          "operator": ">=",
+          "value": 6,
+          "description_zh": "RunState.TotalFloor 至少为 6。"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "RANWID_THE_ELDER": {
+      "event_id": "RANWID_THE_ELDER",
+      "class_name": "RanwidTheElder",
+      "aliases": [
+        "RANWID_THE_ELDER",
+        "RanwidTheElder"
+      ],
+      "display_name": {
+        "zhs": "长者兰伟德",
+        "eng": "Ranwid the Elder",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "RANWID_THE_ELDER.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 373,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "RANWID_THE_ELDER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 360,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "RANWID_THE_ELDER.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 368,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "RANWID_THE_ELDER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 355,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\RanwidTheElder.cs",
+      "source_line": 51,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act2 及以后可出现（源码 CurrentActIndex > 0）；每名玩家至少有 1 个可交易遗物、金币至少 100，并且至少有 1 瓶药水。",
+      "allowed_summary_en": "Not allowed in Act 1; every player needs at least one tradable relic, at least 100 gold, and at least one potion.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": ">",
+          "value": 0,
+          "description_zh": "当前 Act 索引大于 0，也就是 Act2 及以后。"
+        },
+        {
+          "type": "relic",
+          "operator": "exists",
+          "value": "RelicModel.IsTradable",
+          "description_zh": "每名玩家至少有 1 个可交易遗物。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 100,
+          "description_zh": "每名玩家金币至少 100。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "potion",
+          "operator": "exists",
+          "value": "any potion",
+          "description_zh": "每名玩家至少有 1 瓶药水。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain",
+      "helper_locations": [
+        {
+          "method": "GetValidRelics(Player player)",
+          "source_line": 108
+        }
+      ]
+    },
+    "RELIC_TRADER": {
+      "event_id": "RELIC_TRADER",
+      "class_name": "RelicTrader",
+      "aliases": [
+        "RELIC_TRADER",
+        "RelicTrader"
+      ],
+      "display_name": {
+        "zhs": "遗物交换商",
+        "eng": "Relic Trader",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "RELIC_TRADER.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 390,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "RELIC_TRADER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 383,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "RELIC_TRADER.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 385,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "RELIC_TRADER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 378,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\RelicTrader.cs",
+      "source_line": 98,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act2 及以后可出现（源码 CurrentActIndex > 0），且每名玩家至少有 5 个可交易遗物。",
+      "allowed_summary_en": "Not allowed in Act 1; every player must have at least five tradable relics.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": ">",
+          "value": 0,
+          "description_zh": "当前 Act 索引大于 0，也就是 Act2 及以后。"
+        },
+        {
+          "type": "relic",
+          "operator": ">=",
+          "value": "5 relics where IsTradable",
+          "description_zh": "每名玩家至少有 5 个可交易遗物。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain",
+      "helper_locations": [
+        {
+          "method": "GetValidRelics(Player player)",
+          "source_line": 149
+        }
+      ]
+    },
+    "ROOM_FULL_OF_CHEESE": {
+      "event_id": "ROOM_FULL_OF_CHEESE",
+      "class_name": "RoomFullOfCheese",
+      "aliases": [
+        "ROOM_FULL_OF_CHEESE",
+        "RoomFullOfCheese"
+      ],
+      "display_name": {
+        "zhs": "满屋芝士",
+        "eng": "Room Full of Cheese",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "ROOM_FULL_OF_CHEESE.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 400,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "ROOM_FULL_OF_CHEESE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 394,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "ROOM_FULL_OF_CHEESE.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 395,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "ROOM_FULL_OF_CHEESE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 389,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\RoomFullOfCheese.cs",
+      "source_line": 23,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act1 或 Act2 可出现（源码 CurrentActIndex < 2）。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex < 2.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": "<",
+          "value": 2,
+          "description_zh": "当前 Act 索引小于 2，也就是 Act1 或 Act2。"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "ROUND_TEA_PARTY": {
+      "event_id": "ROUND_TEA_PARTY",
+      "class_name": "RoundTeaParty",
+      "aliases": [
+        "ROUND_TEA_PARTY",
+        "RoundTeaParty"
+      ],
+      "display_name": {
+        "zhs": "圆桌茶会",
+        "eng": "The Round Tea Party",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "ROUND_TEA_PARTY.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 413,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "ROUND_TEA_PARTY.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 404,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "ROUND_TEA_PARTY.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 407,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "ROUND_TEA_PARTY.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 399,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\RoundTeaParty.cs",
+      "source_line": 26,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家当前生命至少为 12。",
+      "allowed_summary_en": "Every player must have at least 12 current HP.",
+      "conditions": [
+        {
+          "type": "hp",
+          "operator": ">=",
+          "value": 12,
+          "description_zh": "每名玩家当前生命至少 12。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "SLIPPERY_BRIDGE": {
+      "event_id": "SLIPPERY_BRIDGE",
+      "class_name": "SlipperyBridge",
+      "aliases": [
+        "SLIPPERY_BRIDGE",
+        "SlipperyBridge"
+      ],
+      "display_name": {
+        "zhs": "滑脚木桥",
+        "eng": "Slippery Bridge",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "SLIPPERY_BRIDGE.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 474,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "SLIPPERY_BRIDGE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 468,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "SLIPPERY_BRIDGE.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 468,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "SLIPPERY_BRIDGE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 462,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\SlipperyBridge.cs",
+      "source_line": 82,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "总楼层大于 6，且每名玩家牌组中至少有 1 张可移除牌。",
+      "allowed_summary_en": "TotalFloor must be greater than 6, and every player must have at least one removable deck card.",
+      "conditions": [
+        {
+          "type": "floor",
+          "operator": ">",
+          "value": 6,
+          "description_zh": "RunState.TotalFloor 大于 6。"
+        },
+        {
+          "type": "deck",
+          "operator": "exists",
+          "value": "card.IsRemovable == true",
+          "description_zh": "每名玩家牌组中至少有 1 张 IsRemovable 为 true 的牌。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "SPIRALING_WHIRLPOOL": {
+      "event_id": "SPIRALING_WHIRLPOOL",
+      "class_name": "SpiralingWhirlpool",
+      "aliases": [
+        "SPIRALING_WHIRLPOOL",
+        "SpiralingWhirlpool"
+      ],
+      "display_name": {
+        "zhs": "螺旋漩涡",
+        "eng": "Spiraling Whirlpool",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "SPIRALING_WHIRLPOOL.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 485,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "SPIRALING_WHIRLPOOL.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 476,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "SPIRALING_WHIRLPOOL.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 479,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "SPIRALING_WHIRLPOOL.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 470,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\SpiralingWhirlpool.cs",
+      "source_line": 27,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家牌组中都必须有至少 1 张可被 Spiral 附魔的基础 Strike 或基础 Defend 牌。",
+      "allowed_summary_en": "Every player must have at least one Basic Strike-tagged or Basic Defend-tagged deck card that Spiral can enchant.",
+      "conditions": [
+        {
+          "type": "deck",
+          "operator": "exists",
+          "value": "Spiral.CanEnchant(card)",
+          "description_zh": "每名玩家牌组中至少有 1 张满足基础附魔规则、稀有度为 Basic，且带 Strike 或 Defend 标签的牌。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "STONE_OF_ALL_TIME": {
+      "event_id": "STONE_OF_ALL_TIME",
+      "class_name": "StoneOfAllTime",
+      "aliases": [
+        "STONE_OF_ALL_TIME",
+        "StoneOfAllTime"
+      ],
+      "display_name": {
+        "zhs": "永恒之石",
+        "eng": "Stone of All Time",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "STONE_OF_ALL_TIME.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 507,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "STONE_OF_ALL_TIME.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 496,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "STONE_OF_ALL_TIME.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 501,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "STONE_OF_ALL_TIME.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 490,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\StoneOfAllTime.cs",
+      "source_line": 52,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "仅 Act2 可出现（源码 CurrentActIndex == 1），且每名玩家至少有 1 瓶药水。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex == 1 and every player has at least one potion.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": "==",
+          "value": 1,
+          "description_zh": "当前 Act 索引等于 1，也就是 Act2。"
+        },
+        {
+          "type": "potion",
+          "operator": "exists",
+          "value": "any potion",
+          "description_zh": "每名玩家至少有 1 瓶药水。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "SYMBIOTE": {
+      "event_id": "SYMBIOTE",
+      "class_name": "Symbiote",
+      "aliases": [
+        "SYMBIOTE",
+        "Symbiote"
+      ],
+      "display_name": {
+        "zhs": "共生体",
+        "eng": "Symbiote",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "SYMBIOTE.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 534,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "SYMBIOTE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 526,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "SYMBIOTE.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 528,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "SYMBIOTE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 520,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\Symbiote.cs",
+      "source_line": 31,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act2 及以后可出现（源码 CurrentActIndex > 0）。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex > 0.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": ">",
+          "value": 0,
+          "description_zh": "当前 Act 索引大于 0，也就是 Act2 及以后。"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "TEA_MASTER": {
+      "event_id": "TEA_MASTER",
+      "class_name": "TeaMaster",
+      "aliases": [
+        "TEA_MASTER",
+        "TeaMaster"
+      ],
+      "display_name": {
+        "zhs": "茶艺大师",
+        "eng": "Tea Master",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "TEA_MASTER.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 572,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "TEA_MASTER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 560,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "TEA_MASTER.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 566,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "TEA_MASTER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 554,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\TeaMaster.cs",
+      "source_line": 34,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "Act1 或 Act2 可出现（源码 CurrentActIndex < 2），且每名玩家金币至少 150。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex < 2 and every player has at least 150 gold.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": "<",
+          "value": 2,
+          "description_zh": "当前 Act 索引小于 2，也就是 Act1 或 Act2。"
+        },
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 150,
+          "description_zh": "每名玩家金币至少 150。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "THE_FUTURE_OF_POTIONS": {
+      "event_id": "THE_FUTURE_OF_POTIONS",
+      "class_name": "TheFutureOfPotions",
+      "aliases": [
+        "THE_FUTURE_OF_POTIONS",
+        "TheFutureOfPotions"
+      ],
+      "display_name": {
+        "zhs": "药水的未来？",
+        "eng": "The Future of Potions?",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "THE_FUTURE_OF_POTIONS.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 577,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "THE_FUTURE_OF_POTIONS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 574,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "THE_FUTURE_OF_POTIONS.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 571,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "THE_FUTURE_OF_POTIONS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 568,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\TheFutureOfPotions.cs",
+      "source_line": 85,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家至少有 2 瓶药水。",
+      "allowed_summary_en": "Every player must have at least two potions.",
+      "conditions": [
+        {
+          "type": "potion",
+          "operator": ">=",
+          "value": 2,
+          "description_zh": "每名玩家至少有 2 瓶药水。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "THE_LEGENDS_WERE_TRUE": {
+      "event_id": "THE_LEGENDS_WERE_TRUE",
+      "class_name": "TheLegendsWereTrue",
+      "aliases": [
+        "THE_LEGENDS_WERE_TRUE",
+        "TheLegendsWereTrue"
+      ],
+      "display_name": {
+        "zhs": "传说是真的",
+        "eng": "The Legends Were True",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "THE_LEGENDS_WERE_TRUE.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 597,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "THE_LEGENDS_WERE_TRUE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 590,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "THE_LEGENDS_WERE_TRUE.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 590,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "THE_LEGENDS_WERE_TRUE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 583,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\TheLegendsWereTrue.cs",
+      "source_line": 23,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "仅 Act1 可出现（源码 CurrentActIndex == 0）；每名玩家牌组非空，且当前生命至少 10。",
+      "allowed_summary_en": "Allowed only in Act 1; every player must have a non-empty deck and at least 10 current HP.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": "==",
+          "value": 0,
+          "description_zh": "当前 Act 索引等于 0，也就是 Act1。"
+        },
+        {
+          "type": "deck",
+          "operator": ">",
+          "value": "0 cards",
+          "description_zh": "每名玩家牌组中至少有 1 张牌。",
+          "applies_to": "all_players"
+        },
+        {
+          "type": "hp",
+          "operator": ">=",
+          "value": 10,
+          "description_zh": "每名玩家当前生命至少 10。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "TRASH_HEAP": {
+      "event_id": "TRASH_HEAP",
+      "class_name": "TrashHeap",
+      "aliases": [
+        "TRASH_HEAP",
+        "TrashHeap"
+      ],
+      "display_name": {
+        "zhs": "垃圾堆",
+        "eng": "Trash Heap",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "TRASH_HEAP.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 646,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "TRASH_HEAP.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 641,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "TRASH_HEAP.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 639,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "TRASH_HEAP.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 634,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\TrashHeap.cs",
+      "source_line": 48,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家当前生命必须大于 5。",
+      "allowed_summary_en": "Every player must have more than 5 current HP.",
+      "conditions": [
+        {
+          "type": "hp",
+          "operator": ">",
+          "value": 5,
+          "description_zh": "每名玩家当前生命大于 5。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "UNREST_SITE": {
+      "event_id": "UNREST_SITE",
+      "class_name": "UnrestSite",
+      "aliases": [
+        "UNREST_SITE",
+        "UnrestSite"
+      ],
+      "display_name": {
+        "zhs": "无休之处",
+        "eng": "Unrest Site",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "UNREST_SITE.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 690,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "UNREST_SITE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 683,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "UNREST_SITE.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 683,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "UNREST_SITE.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 676,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\UnrestSite.cs",
+      "source_line": 26,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家当前生命必须不高于最大生命的 70%。",
+      "allowed_summary_en": "Every player's current HP must be at most 70% of max HP.",
+      "conditions": [
+        {
+          "type": "hp",
+          "operator": "<=",
+          "value": "MaxHp * 0.70",
+          "description_zh": "每名玩家当前生命小于等于最大生命的 70%。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "WAR_HISTORIAN_REPY": {
+      "event_id": "WAR_HISTORIAN_REPY",
+      "class_name": "WarHistorianRepy",
+      "aliases": [
+        "WAR_HISTORIAN_REPY",
+        "WarHistorianRepy"
+      ],
+      "display_name": {
+        "zhs": "战史学家 付袭",
+        "eng": "War Historian, Repy",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "WAR_HISTORIAN_REPY.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 700,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "WAR_HISTORIAN_REPY.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 693,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "WAR_HISTORIAN_REPY.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 693,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "WAR_HISTORIAN_REPY.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 686,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\WarHistorianRepy.cs",
+      "source_line": 30,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "自然普通事件队列中不会直接出现：WarHistorianRepy.IsAllowed() 直接返回 false，会被 EnsureNextEventIsValid 跳过。但如果玩家在进入 Act3 前获得 LanternKey / 灯火钥匙，Act3 普通事件房会先选出第一个合法普通事件，再由 LanternKey.ModifyNextEvent 将该合法事件替换为 WarHistorianRepy。被替换的原事件队列位置会被消耗，但原事件不加入 VisitedEventIds；替换本身不消耗 RNG，且替换结果不再二次检查 IsAllowed。",
+      "allowed_summary_en": "Not naturally selected from the normal event queue: WarHistorianRepy.IsAllowed() returns false and is skipped by EnsureNextEventIsValid. However, if the player has LanternKey before Act3, an Act3 normal event room first selects the next valid normal event, then LanternKey.ModifyNextEvent replaces that valid source event with WarHistorianRepy. The source event queue position is consumed but the source event is not added to VisitedEventIds; the replacement itself consumes no RNG and the replacement result is not checked by IsAllowed again.",
+      "conditions": [
+        {
+          "type": "natural_queue",
+          "operator": "==",
+          "value": false,
+          "description_zh": "自然普通事件队列中不可直接出现：IsAllowed 直接返回 false，会被 EnsureNextEventIsValid 跳过。",
+          "description_en": "Cannot be naturally selected from the normal event queue: IsAllowed returns false and is skipped by EnsureNextEventIsValid."
+        },
+        {
+          "type": "hook_replacement",
+          "source": "LanternKey.ModifyNextEvent",
+          "condition": "player_has_card:LANTERN_KEY && CurrentActIndex == 2",
+          "description_zh": "若进入 Act3 前拥有 LanternKey / 灯火钥匙，Act3 普通事件房会先取第一个合法普通事件，再把它替换为 WarHistorianRepy / 战史学家 付袭。",
+          "description_en": "If LanternKey is owned before Act3, an Act3 normal event room first selects the next valid normal event, then replaces it with WarHistorianRepy."
+        },
+        {
+          "type": "hook_side_effect",
+          "description_zh": "被替换的原普通事件队列位置会被消耗，但原事件不标记为已访问；最终进入并标记已访问的是 WarHistorianRepy。替换不消耗 RNG。",
+          "description_en": "The replaced source event position is consumed, but the source event is not marked visited; WarHistorianRepy is the final visited event. The replacement consumes no RNG."
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain",
+      "hook_only": true,
+      "can_appear_via_hook": true,
+      "hook_source_id": "LANTERN_KEY",
+      "hook_source_class": "LanternKey",
+      "hook_notes_zh": "当前仅补充说明/Tooltip/事件百科条件；RollCore 暂不新增 LanternKey 状态预设或事件替换模拟。",
+      "hook_notes_en": "Description/tooltip/encyclopedia-only note for now; RollCore does not add a LanternKey state preset or event replacement simulation in this patch."
+    },
+    "WATERLOGGED_SCRIPTORIUM": {
+      "event_id": "WATERLOGGED_SCRIPTORIUM",
+      "class_name": "WaterloggedScriptorium",
+      "aliases": [
+        "WATERLOGGED_SCRIPTORIUM",
+        "WaterloggedScriptorium"
+      ],
+      "display_name": {
+        "zhs": "水漫缮写室",
+        "eng": "Waterlogged Scriptorium",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "WATERLOGGED_SCRIPTORIUM.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 715,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "WATERLOGGED_SCRIPTORIUM.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 702,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "WATERLOGGED_SCRIPTORIUM.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 708,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "WATERLOGGED_SCRIPTORIUM.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 695,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\WaterloggedScriptorium.cs",
+      "source_line": 35,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家金币至少 55。",
+      "allowed_summary_en": "Every player must have at least 55 gold.",
+      "conditions": [
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 55,
+          "description_zh": "每名玩家金币至少 55。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "WELCOME_TO_WONGOS": {
+      "event_id": "WELCOME_TO_WONGOS",
+      "class_name": "WelcomeToWongos",
+      "aliases": [
+        "WELCOME_TO_WONGOS",
+        "WelcomeToWongos"
+      ],
+      "display_name": {
+        "zhs": "欢迎来到旺购百货",
+        "eng": "Welcome to Wongo's",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "WELCOME_TO_WONGOS.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 735,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "WELCOME_TO_WONGOS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 719,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "WELCOME_TO_WONGOS.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 728,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "WELCOME_TO_WONGOS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 712,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\WelcomeToWongos.cs",
+      "source_line": 68,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "仅 Act2 可出现（源码 CurrentActIndex == 1），且每名玩家金币至少 100。",
+      "allowed_summary_en": "Allowed only when CurrentActIndex == 1 and every player has at least 100 gold.",
+      "conditions": [
+        {
+          "type": "act",
+          "operator": "==",
+          "value": 1,
+          "description_zh": "当前 Act 索引等于 1，也就是 Act2。"
+        },
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 100,
+          "description_zh": "每名玩家金币至少 100。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "WHISPERING_HOLLOW": {
+      "event_id": "WHISPERING_HOLLOW",
+      "class_name": "WhisperingHollow",
+      "aliases": [
+        "WHISPERING_HOLLOW",
+        "WhisperingHollow"
+      ],
+      "display_name": {
+        "zhs": "低语空谷",
+        "eng": "Whispering Hollow",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "WHISPERING_HOLLOW.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 752,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "WHISPERING_HOLLOW.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 747,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "WHISPERING_HOLLOW.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 745,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "WHISPERING_HOLLOW.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 740,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\WhisperingHollow.cs",
+      "source_line": 31,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家金币至少 44。",
+      "allowed_summary_en": "Every player must have at least 44 gold.",
+      "conditions": [
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 44,
+          "description_zh": "每名玩家金币至少 44。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "WOOD_CARVINGS": {
+      "event_id": "WOOD_CARVINGS",
+      "class_name": "WoodCarvings",
+      "aliases": [
+        "WOOD_CARVINGS",
+        "WoodCarvings"
+      ],
+      "display_name": {
+        "zhs": "木雕",
+        "eng": "Wood Carvings",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "WOOD_CARVINGS.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 765,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "WOOD_CARVINGS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 754,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "WOOD_CARVINGS.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 758,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "WOOD_CARVINGS.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 747,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\WoodCarvings.cs",
+      "source_line": 36,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家牌组中都必须有至少 1 张可移除的基础稀有度牌。",
+      "allowed_summary_en": "Every player must have at least one removable Basic-rarity deck card.",
+      "conditions": [
+        {
+          "type": "cards",
+          "operator": "exists",
+          "value": "card.Rarity == Basic && card.IsRemovable",
+          "description_zh": "每名玩家牌组中存在可移除的基础稀有度牌。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    },
+    "ZEN_WEAVER": {
+      "event_id": "ZEN_WEAVER",
+      "class_name": "ZenWeaver",
+      "aliases": [
+        "ZEN_WEAVER",
+        "ZenWeaver"
+      ],
+      "display_name": {
+        "zhs": "修禅织网者",
+        "eng": "Zen Weaver",
+        "source": [
+          {
+            "lang": "eng",
+            "key": "ZEN_WEAVER.title",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 778,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "eng",
+            "key": "ZEN_WEAVER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/eng/events.json",
+            "line": 769,
+            "table": "events",
+            "field": "description"
+          },
+          {
+            "lang": "zhs",
+            "key": "ZEN_WEAVER.title",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 771,
+            "table": "events",
+            "field": "name"
+          },
+          {
+            "lang": "zhs",
+            "key": "ZEN_WEAVER.pages.INITIAL.description",
+            "file": "localization.zip",
+            "member": "localization/zhs/events.json",
+            "line": 762,
+            "table": "events",
+            "field": "description"
+          }
+        ]
+      },
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Events\\ZenWeaver.cs",
+      "source_line": 32,
+      "method": "override bool IsAllowed(RunState runState)",
+      "allowed_summary_zh": "每名玩家金币至少 125。",
+      "allowed_summary_en": "Every player must have at least 125 gold.",
+      "conditions": [
+        {
+          "type": "gold",
+          "operator": ">=",
+          "value": 125,
+          "description_zh": "每名玩家金币至少 125。",
+          "applies_to": "all_players"
+        }
+      ],
+      "manual_review": false,
+      "confidence": "certain"
+    }
+  },
+  "modify_next_event_hooks": {
+    "LANTERN_KEY": {
+      "hook_owner_id": "LANTERN_KEY",
+      "class_name": "LanternKey",
+      "aliases": [
+        "LANTERN_KEY",
+        "LanternKey"
+      ],
+      "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models.Cards\\LanternKey.cs",
+      "source_line": 30,
+      "method": "override EventModel ModifyNextEvent(EventModel currentEvent)",
+      "trigger_condition_zh": "拥有 LanternKey 的玩家处于 Act3（源码 CurrentActIndex == 2）并进入普通事件房时触发。",
+      "trigger_condition_en": "Triggers when the LanternKey owner is in Act3 (source CurrentActIndex == 2) and enters a normal event room.",
+      "original_event_condition": "the first valid normal event after IsAllowed/visited checks",
+      "replacement_event_id": "WAR_HISTORIAN_REPY",
+      "replacement_class_name": "WarHistorianRepy",
+      "summary_zh": "Act3 拥有 LanternKey 时，第一个合法普通事件会被 WarHistorianRepy 覆盖；原事件队列位置被消耗但不记 visited，最终事件记为 WarHistorianRepy。",
+      "summary_en": "In Act3 with LanternKey, the first valid normal event is overwritten by WarHistorianRepy; the source queue position is consumed but not marked visited, and the final visited event is WarHistorianRepy.",
+      "confidence": "certain",
+      "applies_after": "EnsureNextEventIsValid(runState)",
+      "replacement_checks_is_allowed": false,
+      "consumes_rng": false,
+      "source_event_queue_position_consumed": true,
+      "source_event_marked_visited": false,
+      "final_event_marked_visited": true
+    }
+  },
+  "act_restriction_audit": {
+    "act_specific_rule": "Act 专属事件先由 ActModel.GenerateRooms 使用 act.AllEvents 加入该 Act 的原始事件池。GenerateRooms 同时追加 ModelDb.AllSharedEvents。之后事件队列校验阶段还会调用 EventModel.IsAllowed，因此 Act 限制可能来自事件池、IsAllowed，或两者同时存在。",
+    "shared_event_rule": "SharedEvents 会加入每个 Act 的原始事件队列；如果 shared 事件覆写 IsAllowed 并检查 CurrentActIndex、TotalFloor 或玩家状态，就会在 PullNextEvent 前被 EnsureNextEventIsValid 跳过。",
+    "act_restriction_location": "both",
+    "source_locations": [
+      {
+        "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models\\ActModel.cs",
+        "source_line": 224,
+        "method": "GenerateRooms",
+        "fact": "event pool starts from act.AllEvents, appends ModelDb.AllSharedEvents, filters epoch events, then UnstableShuffle(State.Rng.UpFront)"
+      },
+      {
+        "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Rooms\\RoomSet.cs",
+        "source_line": 100,
+        "method": "EnsureNextEventIsValid",
+        "fact": "skips events where !NextEvent.IsAllowed(runState) or VisitedEventIds contains id"
+      },
+      {
+        "source_file": "_sts2_src_inspect\\sts2\\MegaCrit.Sts2.Core.Models\\ActModel.cs",
+        "source_line": 327,
+        "method": "PullNextEvent",
+        "fact": "validates next event, applies Hook.ModifyNextEvent, then records visited event"
+      }
+    ],
+    "pseudocode": [
+      "events = act.AllEvents + ModelDb.AllSharedEvents",
+      "remove EVENT1/EVENT2/EVENT3 epoch events that are not revealed",
+      "events.UnstableShuffle(State.Rng.UpFront)",
+      "next = events[eventsVisited % events.Count]",
+      "while next is disallowed or already in VisitedEventIds: eventsVisited++",
+      "next = Hook.ModifyNextEvent(runState, next)",
+      "runState.AddVisitedEvent(next)"
+    ],
+    "notes": [
+      "Shared event 是否能在某个 Act 实际出现，取决于它是否在 shared pool 中，以及 IsAllowed 是否按 Act、楼层或玩家状态过滤。",
+      "WarHistorianRepy 是明确例外：IsAllowed 返回 false，但 LanternKey 可以在 CurrentActIndex == 2 时强制替换出它。"
+    ]
+  },
+  "manual_review": [],
+  "warnings": [
+    "Only EventModel subclasses with override bool IsAllowed(RunState runState) are included in event_allowed_rules; events without an override inherit the default allowance behavior.",
+    "Localization display names are populated only when a matching item exists in data/sts2_data.json; missing names are left null instead of guessed.",
+    "DynamicVars and helper predicates are represented from source-level facts and may need exact simulator review for timing or helper internals.",
+    "WAR_HISTORIAN_REPY is hook-only: IsAllowed returns false for natural queue selection, but LanternKey can replace the first valid Act3 normal event with it; this patch documents the rule but does not simulate LanternKey state in RollCore."
+  ]
+}
