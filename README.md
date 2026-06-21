@@ -322,7 +322,7 @@ profiles/database/*.tsv
 ## 鸣谢
 
 - 本项目在设计、代码整理、文档编写、RNG 逻辑校准和版本发布整理过程中使用了 ChatGPT 进行辅助开发。
-- 感谢 Slay the Spire 2 社区中关于 RNG、事件队列、Neow、古神和种子机制的讨论与验证样本。
+- 感谢 Slay the Spire 2 社区中关于 RNG、事件队列、Neow、先古之民和种子机制的讨论与验证样本。
 - 感谢 Mega Crit 制作 Slay the Spire 2。本项目是非官方外部工具，与 Mega Crit 没有关联。
 
 ## 如何贡献
