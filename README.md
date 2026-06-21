@@ -1,6 +1,6 @@
 # RollTheSpire2
 
-`RollTheSpire2` 是一个面向 **Slay the Spire 2 v0.107.1+** 的外部种子分析与批量筛种工具。
+`RollTheSpire2` 是一个面向 **Slay the Spire 2 v0.107.1** 的外部种子分析与批量筛种工具。
 
 它不需要启动游戏即可离线模拟和筛选开局结果，重点支持 Neow 开局、Neow's Bones / 骨骰路线、Neow 遗物效果、Boss、Ancient、事件 effective queue、收藏库和粗筛候选池。项目当前提供 WPF 图形界面，适合单种分析、批量 Roll 种、保存爽种、候选池精筛和 `progress.save` 解锁档案导入。
 
