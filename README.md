@@ -6,7 +6,6 @@
 
 当前稳定版：`v2.1.0`。本版本基于已经实测正确的 `v2.1.0-preview2e` 预测基线整理而来；公开发布整理只更新项目名称、启动脚本、发布脚本和文档，**没有修改 RollCore 预测算法、WPF 功能逻辑、`config.json` 或主运行数据路径**。
 
-> 重要说明：曾经的 `v2.1.0-preview3_public_release_pack` 是坏包，因为它错误地把 `config.json:data_file` 从 `data/legacy/sts2_runtime_legacy_v2.json` 改成了 `data/sts2_data.json`，并移除了 `data/legacy`，会导致预测结果错误。当前稳定版仍以 `data/legacy/sts2_runtime_legacy_v2.json` 作为 RollCore 主运行数据。
 
 ## 内容列表
 
