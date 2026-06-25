@@ -2,10 +2,10 @@
 
 This project is published under the public name **RollTheSpire2**.
 
-Current stable version:
+Current package version:
 
 ```text
-v2.1.0
+v2.1.1
 ```
 
 ## Source/developer workflow
@@ -35,7 +35,7 @@ publish_windows_x64.bat
 The script creates:
 
 ```text
-publish/RollTheSpire2_v2.1.0_win-x64/
+publish/RollTheSpire2_v2.1.1_win-x64/
 ```
 
 That folder is intended to be zipped and attached to a GitHub Release.
@@ -67,7 +67,7 @@ Despite the folder name, `data/legacy/sts2_runtime_legacy_v2.json` is the curren
 Before uploading a release:
 
 1. Build with `build_windows_wpf.bat`.
-2. Run at least one known regression seed and compare against the verified `v2.1.0-preview2e` / `v2.1.0` baseline.
+2. Run at least one known regression seed and compare against the `v2.1.0` stable baseline, plus specific LeadPaperweight low-ascension Rare checks for this patch release.
 3. Run `publish_windows_x64.bat`.
 4. Launch `publish/.../RollTheSpire2.exe` from the publish folder.
 5. Confirm `data/legacy/sts2_runtime_legacy_v2.json` exists in the publish folder.

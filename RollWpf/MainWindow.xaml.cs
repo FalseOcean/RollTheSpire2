@@ -65,7 +65,7 @@ public partial class MainWindow : Window
     private int _lastAnalyzeAscension;
     private string _lastAnalyzeSummary = "";
 
-    private const string AppVersionText = "v2.1.0";
+    private const string AppVersionText = "v2.1.1";
 
     // 与 RollCore.OpeningPredictor.BonesCursePool 保持一致；这里只用于 WPF 下拉候选，不改预测算法。
     private static readonly string[] BonesCursePoolRuntimeIds =
@@ -98,7 +98,7 @@ public partial class MainWindow : Window
         RefreshUnlockProfileStatus();
         AttachSearchTagRefreshHandlers();
         InitializeDefaultMultiplayerPlayers();
-        AppendLog("RollTheSpire2 v2.1.0 started. Root=" + _rootDir);
+        AppendLog("RollTheSpire2 v2.1.1 started. Root=" + _rootDir);
         RefreshStatus();
         RefreshCandidatePoolComboBox();
         EnsureEventDropdownItems();
@@ -1551,7 +1551,7 @@ public partial class MainWindow : Window
         string character = CurrentSearchOwnerName();
         if (template.OutputType is "card" or "transform_card")
         {
-            if (sourceKey.Contains("LeadPaperweight", StringComparison.OrdinalIgnoreCase)) return "下拉框只显示无色罕见卡；这与当前 RollCore 的铅制镇纸预测保持一致。";
+            if (sourceKey.Contains("LeadPaperweight", StringComparison.OrdinalIgnoreCase)) return "下拉框显示无色正常奖励卡（普通 / 罕见 / 稀有）；稀有概率由当前进阶的 RegularEncounter 规则决定。";
             if (sourceKey.Contains("Kaleidoscope", StringComparison.OrdinalIgnoreCase)) return "下拉框显示当前角色以外的职业卡（普通 / 罕见 / 稀有）。preview11 起按两组“每组只能选一张”的可选组语义匹配。";
             if (sourceKey.Contains("ArcaneScroll", StringComparison.OrdinalIgnoreCase) || sourceKey.Contains("HeftyTablet", StringComparison.OrdinalIgnoreCase))
                 return "下拉框只显示当前角色稀有卡（" + character + "）。";
@@ -1618,7 +1618,7 @@ public partial class MainWindow : Window
         string owner = CurrentSearchOwnerName();
 
         if (sourceKey.Contains("LeadPaperweight", StringComparison.OrdinalIgnoreCase))
-            return IsColorlessCard(runtimeId) && CardRarityEquals(runtimeId, "Uncommon");
+            return IsColorlessCard(runtimeId) && IsNormalRewardCardRarity(runtimeId);
 
         if (sourceKey.Contains("Kaleidoscope", StringComparison.OrdinalIgnoreCase))
             return IsCharacterCard(runtimeId) && !CardOwnedBy(runtimeId, owner) && IsNormalRewardCardRarity(runtimeId);
@@ -1674,7 +1674,7 @@ public partial class MainWindow : Window
         string rarity = CardRarity(runtimeId);
         string suffix = string.IsNullOrWhiteSpace(rarity) ? "" : "（" + rarity + "）";
         string sourceKey = template.SourceKey ?? "";
-        if (sourceKey.Contains("LeadPaperweight", StringComparison.OrdinalIgnoreCase)) return suffix + "；铅制镇纸当前只筛无色罕见卡。";
+        if (sourceKey.Contains("LeadPaperweight", StringComparison.OrdinalIgnoreCase)) return suffix + "；铅制镇纸只筛无色普通 / 罕见 / 稀有奖励卡。";
         if (sourceKey.Contains("Kaleidoscope", StringComparison.OrdinalIgnoreCase)) return suffix + "；万花筒只筛当前角色以外的职业普通 / 罕见 / 稀有卡。";
         if (sourceKey.Contains("ArcaneScroll", StringComparison.OrdinalIgnoreCase) || sourceKey.Contains("HeftyTablet", StringComparison.OrdinalIgnoreCase)) return suffix + "；该来源只筛当前角色稀有卡。";
         if (sourceKey.Contains("LostCoffer", StringComparison.OrdinalIgnoreCase)) return suffix + "；失物盒只筛当前角色普通 / 罕见 / 稀有奖励卡。";
@@ -5593,7 +5593,7 @@ public partial class MainWindow : Window
     {
         var sb = new StringBuilder();
         sb.AppendLine("RollTheSpire2 数据状态");
-        sb.AppendLine("版本: v2.1.0");
+        sb.AppendLine("版本: v2.1.1");
         sb.AppendLine("生成时间: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
         sb.AppendLine(new string('=', 72));
         sb.AppendLine();

@@ -1,39 +1,58 @@
 # Project Context Current
 
-Current stable baseline: `v2.1.0`.
+记录日期：2026-06-26  
+适用游戏版本：Slay the Spire 2 v0.107.1+ RNG Rework 主线（项目简称 0.107.1 rng+）
 
-This stable package is promoted from the verified `v2.1.0-preview2e` prediction baseline. Public cleanup and version promotion preserve RollCore prediction code, WPF feature logic, `config.json`, and runtime data paths.
+> 当前项目已经引入 `CURRENT_STATUS.md` 作为唯一开发基线。新对话、新模型或新 Project 应优先读取仓库根目录的 `CURRENT_STATUS.md`，再读取本文件和知识库。
 
-## Correct runtime baseline
+Current stable patch: `v2.1.1`.
 
-- STS2 target: v0.107.1+ RNG rework.
-- RNG: game-compatible xoshiro256** / MegaRandom behavior in RollCore.
-- Visible seed length: default 10 characters.
-- Main runtime data file: `data/legacy/sts2_runtime_legacy_v2.json`.
-- Do not replace the runtime data with `data/sts2_data.json`.
+Previous public stable baseline: `v2.1.0`.
 
-## Verified prediction chains
+This stable patch is based on `v2.1.0` and fixes `LeadPaperweight` / 铅制镇纸 card rarity modeling. The old RollCore path treated LeadPaperweight as `NoRare`; `v2.1.1` changes it to use the colorless `RegularEncounter` reward path, allowing Common / Uncommon / Rare where current game rarity odds permit them.
 
-- Neow choices
-- Neow's Bones route
-- NewLeaf / LeafyPoultice / Kaleidoscope / ScrollBoxes
-- Relic predictions
-- Act selection
-- Boss and Ancient
-- Effective event queue
+The package still preserves the core public-release data rule:
 
-## Main workflows
+```text
+config.json:data_file = data/legacy/sts2_runtime_legacy_v2.json
+```
 
-- Single seed analysis
-- Batch seed search
-- Favorites database
-- Candidate pool / coarse filter workflow
-- progress.save unlock profile import
+Do not replace this runtime data file with `data/sts2_data.json` during documentation or public-release cleanup.
 
-## Character display names
+Key current mainline:
 
-- Ironclad = 铁甲战士
-- Defect = 故障机器人
-- Silent = 静默猎手
-- Regent = 储君
-- Necrobinder = 亡灵契约师
+```text
+RollCore/    prediction core
+RollWpf/     WPF UI
+config.json  active runtime data path
+data/        required runtime/source/metadata files
+docs/        public and maintenance documentation
+```
+
+Canonical maintenance documents:
+
+```text
+CURRENT_STATUS.md
+docs/README.md
+docs/KNOWLEDGE_MANAGEMENT.md
+docs/source_audits/
+docs/KNOWLEDGE_BASE/
+docs/ADR/
+docs/postmortems/
+```
+
+Known recent fix:
+
+```text
+LeadPaperweight can generate Rare colorless cards at low ascension / when rarity odds permit it.
+Old NoRare modeling was a historical calibration error caused by insufficient low-ascension coverage.
+```
+
+See:
+
+```text
+docs/source_audits/LEAD_PAPERWEIGHT_RARE_2026-06-26.md
+docs/KNOWLEDGE_BASE/CARD_REWARDS_AND_SCARCITY.md
+docs/ADR/ADR-001-leadpaperweight-rare.md
+docs/postmortems/POSTMORTEM_LEADPAPERWEIGHT_RARITY.md
+```

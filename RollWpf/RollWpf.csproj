@@ -8,9 +8,9 @@
     <AssemblyName>RollTheSpire2</AssemblyName>
     <Product>RollTheSpire2</Product>
     <Description>Slay the Spire 2 seed analysis and filtering companion tool.</Description>
-    <Version>2.1.0</Version>
-    <FileVersion>2.1.0.0</FileVersion>
-    <InformationalVersion>2.1.0</InformationalVersion>
+    <Version>2.1.1</Version>
+    <FileVersion>2.1.1.0</FileVersion>
+    <InformationalVersion>2.1.1</InformationalVersion>
     <RootNamespace>RollWpf</RootNamespace>
   </PropertyGroup>
   <ItemGroup>

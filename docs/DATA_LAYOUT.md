@@ -1,5 +1,10 @@
 # Data Layout
 
+记录日期：2026-06-26  
+适用游戏版本：Slay the Spire 2 v0.107.1+ RNG Rework 主线（项目简称 0.107.1 rng+）
+
+> 规范化知识库位置：`docs/KNOWLEDGE_BASE/DATA_LAYOUT.md`。本文件保留作为 public release / README 的短入口。
+
 This project currently uses multiple data files. They are not interchangeable.
 
 ## Active RollCore runtime data

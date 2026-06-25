@@ -1,12 +1,18 @@
 # Versioning
 
-## Current stable version
+## Current package
+
+```text
+v2.1.1
+```
+
+`v2.1.1` is a stable maintenance patch based on the public `v2.1.0` stable package. It intentionally changes RollCore prediction behavior for `LeadPaperweight` / 铅制镇纸 so that the relic follows the colorless `RegularEncounter` reward rarity path and can include Rare colorless cards where game rarity odds permit them.
+
+Previous public stable baseline before this fix:
 
 ```text
 v2.1.0
 ```
-
-`v2.1.0` is the first public stable baseline under the **RollTheSpire2** name. It is promoted from the verified `v2.1.0-preview2e` prediction baseline.
 
 ## Version line meanings
 
@@ -21,18 +27,9 @@ stable = public baseline intended for GitHub Releases
 
 `v2.1.0-preview3_public_release_pack` should not be used as a prediction baseline. It changed the runtime data path and removed required runtime data.
 
-For future public cleanup work, use the latest tested stable package as the base unless a newer preview has been explicitly confirmed in game.
-
 ## Safe cleanup rule
 
-Documentation cleanup may remove old notes and archives, but should not modify:
-
-```text
-RollCore/
-RollWpf/
-config.json
-data/
-```
+Documentation cleanup may remove old notes and archives, but should not modify prediction code, `config.json`, or runtime data paths unless the version is explicitly a logic or data migration release.
 
 The active runtime data path must remain:
 

@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.1.1 Stable
+
+Prediction correctness patch for **RollTheSpire2**.
+
+- Fixed `LeadPaperweight` / 铅制镇纸 card reward modeling.
+- `LeadPaperweight` no longer uses the RollCore `CreateCardForRewardNoRare(...)` path.
+- It now uses the normal colorless `RegularEncounter` card reward rarity path, allowing Rare colorless cards where the current game rarity odds permit them.
+- Updated WPF process-filter dropdowns and validation so LeadPaperweight can select colorless Common / Uncommon / Rare cards instead of only Uncommon / NoRare candidates.
+- Added `docs/POSTMORTEM_LEADPAPERWEIGHT_RARITY.md` to record the historical misattribution and the testing gap around low ascension.
+- Kept `config.json:data_file` unchanged: `data/legacy/sts2_runtime_legacy_v2.json`.
+- Documentation system refresh:
+  - Added `CURRENT_STATUS.md` as the current source of truth.
+  - Added `docs/README.md` and `docs/KNOWLEDGE_MANAGEMENT.md`.
+  - Added `docs/source_audits/`, `docs/KNOWLEDGE_BASE/`, `docs/ADR/`, and `docs/postmortems/`.
+  - Added `PROJECT_SOURCE_CURRENT.md` for ChatGPT Project / new-session context migration.
+  - Refreshed root `README.md` and `README_EN.md` so they describe `v2.1.1` as the current public stable patch release.
+
 ## v2.1.0 Stable
 
 Stable public baseline for **RollTheSpire2**.

@@ -229,7 +229,7 @@
         {
           "template_id": "lead_paperweight_colorless_card",
           "label": {
-            "zhs": "铅制镇纸：无色罕见卡牌结果",
+            "zhs": "铅制镇纸：无色卡牌结果",
             "eng": "Lead Paperweight colorless card result"
           },
           "output_type": "card",
@@ -238,7 +238,7 @@
             "blacklist"
           ],
           "source_key": "source_cards.LeadPaperweight",
-          "notes": ""
+          "notes": "v2.1.1: follows colorless RegularEncounter reward rarity; Rare colorless cards are allowed when game rarity odds permit them."
         }
       ],
       "affects_rng": true,
@@ -252,9 +252,9 @@
           "sts2/MegaCrit.Sts2.Core.Models.Relics/LeadPaperweight.cs:19",
           "sts2/MegaCrit.Sts2.Core.Models.Relics/LeadPaperweight.cs:21"
         ],
-        "notes": "Audited from relic source; process classification is represented by process_templates."
+        "notes": "Audited from relic source; process classification is represented by process_templates. v2.1.1: LeadPaperweight follows colorless RegularEncounter reward rarity and can include Rare where game rarity odds permit it."
       },
-      "notes": "Audited from relic source; process classification is represented by process_templates.",
+      "notes": "Audited from relic source; process classification is represented by process_templates. v2.1.1: LeadPaperweight follows colorless RegularEncounter reward rarity and can include Rare where game rarity odds permit it.",
       "warnings": []
     },
     "LostCoffer": {

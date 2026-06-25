@@ -496,7 +496,7 @@ public sealed class OpeningPredictor
 
     private void SimulateLeadPaperweight(SimState st)
     {
-        var cards = st.CreateCardForRewardNoRare(st.ColorlessCardPoolName, 2, false);
+        var cards = st.CreateCardForReward(st.ColorlessCardPoolName, 2, "RegularEncounter", null, false);
         st.RecordCardChoiceGroup("LeadPaperweight", cards, st.ColorlessCardPoolName, "colorless", "card_reward");
         if (_plan.LeadPaperweightChoice >= 0 && _plan.LeadPaperweightChoice < cards.Count) st.AddCardsToDeck(new[] { cards[_plan.LeadPaperweightChoice] }, st.ColorlessCardPoolName, "LeadPaperweight");
     }

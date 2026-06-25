@@ -3,7 +3,7 @@ setlocal EnableExtensions
 cd /d "%~dp0"
 
 set APP_NAME=RollTheSpire2
-set APP_VERSION=v2.1.0
+set APP_VERSION=v2.1.1
 set RUNTIME=win-x64
 set OUT_DIR=publish\%APP_NAME%_%APP_VERSION%_%RUNTIME%
 
